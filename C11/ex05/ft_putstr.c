@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 15:20:45 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/02/22 15:20:58 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:49:15 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (is_negative * data);
+}
+
+void	error(void)
+{
+	write(1, "0\n", 2);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:02:18 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/15 15:26:17 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:29:01 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int main(int argc, char **argv)
                 std::cout << argv[i][j];
             }
         }
+        std::cout << '\n';
     }
-
 }

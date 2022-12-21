@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 09:05:37 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/19 09:26:04 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:41:32 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ class Contact
         std::string darkestSecret;
 
     public:
-        Contact();
-        ~Contact();
-
-
+        void AddContact();
 };
 
 #endif

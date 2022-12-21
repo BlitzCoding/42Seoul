@@ -6,18 +6,18 @@
 #    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 08:55:18 by yonghlee          #+#    #+#              #
-#    Updated: 2022/12/19 09:12:19 by yonghlee         ###   ########.fr        #
+#    Updated: 2022/12/21 13:45:31 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= megaphone.cpp
+SRCS			= Contact.cpp main.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CC				= c++
 RM				= rm -rf
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -std=c++98
 
-NAME			= megaphone
+NAME			= phoneBook
 
 all:			$(NAME)
 

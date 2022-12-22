@@ -14,15 +14,16 @@
 
 int main()
 {
-    PhoneBook phoneBook;
+    PhoneBook   phoneBook;
     std::string cmd;
-    int         search_index;
+    std::string search_index;
     int         index;
-    int         n;
+    bool        flag;
 
     index = 0;
     while (cmd != "EXIT")
     {
+        flag = true;
         std::cout << "\n *** Write Your Command (ADD, SEARCH, EXIT) *** \n";
         std::cin >> cmd;
         if (cmd == "ADD")
@@ -31,13 +32,29 @@ int main()
         }
         else if (cmd == "SEARCH")
         {
-            phoneBook.searchTable(index);
+            phoneBook.searchTable(index % 8);
             std::cout << "Input index : ";
-            std::cin >> search_index;
-            if (search_index > 0 && search_index <= index)
-                phoneBook.searchResult(search_index);
-            else
-                std::cout << "Worng Index\n";
+            std::cin.ignore();
+            std::getline(std::cin, search_index);
+            for (unsigned long i = 0; i < search_index.length(); i++)
+            {
+                if (isdigit(search_index[i]) == 0)
+                {
+                    std::cout << "Worng Index\n";
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                if (stoi(search_index) > 0 && stoi(search_index) <= index)
+                    phoneBook.searchResult(stoi(search_index));
+                else
+                {
+                    std::cout << "Worng Index\n";
+                    continue;
+                }
+            }
         }
         else if (cmd == "EXIT")
         {

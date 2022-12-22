@@ -51,20 +51,21 @@ void PhoneBook::addTable(int index)
     std::string phoneNumber;
     std::string darkestSecret;
 
+    std::cin.ignore();
     std::cout << "Input First Name : ";
-    std::cin >> firstName;
+    std::getline(std::cin, firstName);
     temp.setFirstName(firstName);
     std::cout << "Input Last Name : ";
-    std::cin >> lastName;
+    std::getline(std::cin, lastName);
     temp.setLastName(lastName);
     std::cout << "Input NickName : ";
-    std::cin >> nickName;
+    std::getline(std::cin, nickName);
     temp.setNickName(nickName);
     std::cout << "Input phoneNumber Name : ";
-    std::cin >> phoneNumber;
+    std::getline(std::cin, phoneNumber);
     temp.setPhoneNumber(phoneNumber);
     std::cout << "Input Secret : ";
-    std::cin >> darkestSecret;
+    std::getline(std::cin, darkestSecret);
     temp.setDarkestSecret(darkestSecret);
     
     this->contacts[index] = temp;

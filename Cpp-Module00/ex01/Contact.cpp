@@ -19,7 +19,7 @@ Contact::Contact()
 
 Contact::~Contact()
 {
-    std::cout << "Success Destructor\n";
+
 }
 
 void    Contact::setFirstName(std::string firstName)

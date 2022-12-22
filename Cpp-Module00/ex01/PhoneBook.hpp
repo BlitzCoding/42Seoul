@@ -18,13 +18,14 @@
 class PhoneBook
 {
     private:
-        int     idx;
         Contact contacts[8];
     public:
         PhoneBook();
-        void Add();
-        void Search();
-        void Print();
+        ~PhoneBook();
+        void addTable(int index);
+        void searchTable(int path);
+        void searchResult(int index);
+        void setTable(int n);
 };
 
 #endif

@@ -12,12 +12,97 @@
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook()
+void	printTable(std::string str)
 {
-    this->idx = 0;
+	int len;
+	
+    len = str.size();
+    if (len <= 10)
+    {
+        std::cout << std::setw(10);
+        std::cout << str;
+        std::cout << '|';
+    }
+    else
+    {
+        std::cout << std::setw(9);
+        std::cout << str.substr(0, 9);
+        std::cout << '.';
+        std::cout << '|';
+    }
 }
 
-PhoneBook::Add()
+PhoneBook::PhoneBook()
 {
-    this->contacts
+
 }
+
+PhoneBook::~PhoneBook()
+{
+
+}
+
+void PhoneBook::addTable(int index)
+{
+    Contact     temp;
+    std::string firstName;
+    std::string lastName;
+    std::string nickName;
+    std::string phoneNumber;
+    std::string darkestSecret;
+
+    std::cout << "Input First Name : ";
+    std::cin >> firstName;
+    temp.setFirstName(firstName);
+    std::cout << "Input Last Name : ";
+    std::cin >> lastName;
+    temp.setLastName(lastName);
+    std::cout << "Input NickName : ";
+    std::cin >> nickName;
+    temp.setNickName(nickName);
+    std::cout << "Input phoneNumber Name : ";
+    std::cin >> phoneNumber;
+    temp.setPhoneNumber(phoneNumber);
+    std::cout << "Input Secret : ";
+    std::cin >> darkestSecret;
+    temp.setDarkestSecret(darkestSecret);
+    
+    this->contacts[index] = temp;
+}
+
+void PhoneBook::searchTable(int size)
+{
+    printTable("First Name");
+    printTable("Last Name");
+    printTable("NickName");
+    printTable("Phone");
+    std::cout << '\n';
+    for (int i = 0; i < size; i++)
+    {
+        printTable(this->contacts[i].getFirstName());
+        printTable(this->contacts[i].getLastName());
+        printTable(this->contacts[i].getNickName());
+        printTable(this->contacts[i].getPhoneNumber());
+        std::cout << '\n';
+    }
+}
+
+void PhoneBook::searchResult(int index)
+{
+    printTable(this->contacts[index - 1].getFirstName());
+    printTable(this->contacts[index - 1].getLastName());
+    printTable(this->contacts[index - 1].getNickName());
+    printTable(this->contacts[index - 1].getPhoneNumber());
+}
+
+// void PhoneBook::test(int size)
+// {
+//     for (int i = 0; i < size; i++)
+//     {
+//         std::cout << contacts[i].getFirstName() << " , ";
+//         std::cout << contacts[i].getLastName() << " , ";
+//         std::cout << contacts[i].getNickName() << " , ";
+//         std::cout << contacts[i].getPhoneNumber() << " , ";
+//         std::cout << contacts[i].getDarkestSecret() << '|';    
+//     }
+// }

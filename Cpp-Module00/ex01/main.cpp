@@ -16,18 +16,28 @@ int main()
 {
     PhoneBook phoneBook;
     std::string cmd;
+    int         search_index;
+    int         index;
+    int         n;
 
+    index = 0;
     while (cmd != "EXIT")
     {
         std::cout << "\n *** Write Your Command (ADD, SEARCH, EXIT) *** \n";
         std::cin >> cmd;
         if (cmd == "ADD")
         {
-            contact.AddContact();
+            phoneBook.addTable((index++) % 8);
         }
         else if (cmd == "SEARCH")
         {
-
+            phoneBook.searchTable(index);
+            std::cout << "Input index : ";
+            std::cin >> search_index;
+            if (search_index > 0 && search_index <= index)
+                phoneBook.searchResult(search_index);
+            else
+                std::cout << "Worng Index\n";
         }
         else if (cmd == "EXIT")
         {

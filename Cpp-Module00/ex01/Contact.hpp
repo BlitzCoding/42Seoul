@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <string.h>
+#include <iomanip>
 
 class Contact
 {
@@ -26,7 +27,20 @@ class Contact
         std::string darkestSecret;
 
     public:
-        void AddContact();
+        Contact();
+        ~Contact();
+
+        std::string getFirstName() const;
+        std::string getLastName() const;
+        std::string getNickName() const;
+        std::string getPhoneNumber() const;
+        std::string getDarkestSecret() const;
+
+        void        setFirstName(std::string firstName);
+        void        setLastName(std::string lasttName);
+        void        setNickName(std::string nickName);
+        void        setPhoneNumber(std::string phoneNumber);
+        void        setDarkestSecret(std::string darkestSecret);
 };
 
 #endif

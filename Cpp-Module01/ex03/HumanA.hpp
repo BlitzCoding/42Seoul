@@ -16,10 +16,10 @@ class HumanA
 {
     private:
         std::string name;
-        std::string weapon;
+        Weapon      weapon;
     public:
         HumanA();
-        HumanA(std::string _name, std::string _weapon);
+        HumanA(std::string _name, Weapon _weapon);
         ~HumanA();
         void attack();
 };

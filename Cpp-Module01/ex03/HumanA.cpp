@@ -17,18 +17,17 @@ HumanA::HumanA()
 
 }
 
-HumanA::HumanA(std::string _name, std::string _weapon)
+HumanA::HumanA(std::string _name, Weapon _weapon) : weapon(_weapon), name(_name)
 {
-    this->name = _name;
-    this->weapon = _weapon;
+
 }
 
 HumanA::~HumanA()
 {
-
+    std::cout << "HumanA Destroy\n";
 }
 
 void HumanA::attack()
 {
-    std::cout << this->name << " attacks with their " << this->weapon << '\n';
+    std::cout << this->name << " attacks with their " << this->weapon.getType() << '\n';
 }

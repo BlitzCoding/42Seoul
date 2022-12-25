@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 09:16:56 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/25 11:58:53 by yonghlee         ###   ########.fr       */
+/*   Created: 2022/12/25 11:19:20 by yonghlee          #+#    #+#             */
+/*   Updated: 2022/12/25 11:32:26 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "Zombie.hpp"
 
-#include "Contact.hpp"
-
-class PhoneBook
+Zombie::Zombie()
 {
-    private:
-        Contact contacts[8];
-    public:
-        PhoneBook();
-        ~PhoneBook();
-        void addTable(int index);
-        void searchTable(int path);
-        void searchResult(int index);
-        void setTable(int n);
-};
 
-#endif
+}
+
+Zombie::Zombie(std::string _name)
+{
+    this->name = _name;
+}
+
+Zombie::~Zombie()
+{
+    std::cout << this->name << " is Died" << '\n';
+}
+
+void Zombie::announce()
+{
+    std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << '\n';
+}
+
+void Zombie::setZombie(std::string _name)
+{
+    this->name = _name;
+}

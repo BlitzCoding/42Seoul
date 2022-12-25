@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 13:51:39 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/21 14:04:25 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/25 14:02:07 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void	printTable(std::string str)
     }
 }
 
+void    setContact(std::string &_name)
+{
+    while (getline(std::cin, _name))
+    {
+        if (!_name.empty() && !std::cin.eof())
+        {
+            return ;
+        }
+    }
+    std::cout << "EOF\n";
+    exit(0);
+}
+
 PhoneBook::PhoneBook()
 {
 
@@ -53,19 +66,19 @@ void PhoneBook::addTable(int index)
 
     std::cin.ignore();
     std::cout << "Input First Name : ";
-    std::getline(std::cin, firstName);
+    setContact(firstName);
     temp.setFirstName(firstName);
     std::cout << "Input Last Name : ";
-    std::getline(std::cin, lastName);
+    setContact(lastName);
     temp.setLastName(lastName);
     std::cout << "Input NickName : ";
-    std::getline(std::cin, nickName);
+    setContact(nickName);
     temp.setNickName(nickName);
     std::cout << "Input phoneNumber Name : ";
-    std::getline(std::cin, phoneNumber);
+    setContact(phoneNumber);
     temp.setPhoneNumber(phoneNumber);
     std::cout << "Input Secret : ";
-    std::getline(std::cin, darkestSecret);
+    setContact(darkestSecret);
     temp.setDarkestSecret(darkestSecret);
     
     this->contacts[index] = temp;

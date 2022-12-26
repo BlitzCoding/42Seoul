@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 13:51:39 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/25 14:02:07 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/26 11:34:49 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,14 @@ void PhoneBook::searchTable(int size)
     printTable("NickName");
     printTable("Phone");
     std::cout << '\n';
+    if (size > 8)
+        size = 8;
     for (int i = 0; i < size; i++)
     {
-        printTable(this->contacts[i].getFirstName());
-        printTable(this->contacts[i].getLastName());
-        printTable(this->contacts[i].getNickName());
-        printTable(this->contacts[i].getPhoneNumber());
+        printTable(this->contacts[i % 8].getFirstName());
+        printTable(this->contacts[i % 8].getLastName());
+        printTable(this->contacts[i % 8].getNickName());
+        printTable(this->contacts[i % 8].getPhoneNumber());
         std::cout << '\n';
     }
 }

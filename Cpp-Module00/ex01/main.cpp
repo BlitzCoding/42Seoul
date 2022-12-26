@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:58:25 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/25 12:04:01 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/26 11:33:41 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main()
         }
         else if (cmd == "SEARCH")
         {
-            phoneBook.searchTable(index % 8);
+            phoneBook.searchTable(index);
             std::cout << "Input index : ";
             std::cin.ignore();
             std::getline(std::cin, search_index);

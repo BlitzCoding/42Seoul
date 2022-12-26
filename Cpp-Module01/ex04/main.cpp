@@ -3,49 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 23:08:31 by iyonghun          #+#    #+#             */
-/*   Updated: 2022/12/25 23:09:26 by iyonghun         ###   ########.fr       */
+/*   Updated: 2022/12/26 09:27:07 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 
-int	main(int ac, char *av[])
+int main(int argc, char *argv[])
 {
-	if (ac != 4){
-		std::cout << "Bad arguments."<< std::endl << "Use like " << av[0] << " <file> \"S1\" \"S2\"\033[0m" << std::endl;
-		return(1);
+	if (argc != 4)
+	{
+		std::cout << "Arguments Fail\n";
+		return 1;
 	}
 
-	std::ifstream	ifile(av[1]);
-	std::string 	outfile(av[1]);
+	std::ifstream infile(argv[1]);
+	std::string outfile(argv[1]);
+	std::ofstream replaceFile(outfile.data(), std::ios::in | std::ios::trunc);
+
+	std::string search(argv[2]);
+	std::string replaceStr(argv[3]);
+	std::string line;
+
 	outfile += ".replace";
-	std::ofstream	ofile(outfile.data(), std::ios::in | std::ios::trunc);
-
-	std::string		search(av[2]);
-	std::string		remplace(av[3]);
-	std::string		line;
-	size_t		i;
-	if (!ifile.is_open()){
-		std::cout << "Cannot open file " << av[1] << std::endl;
-		return(2);
+	if (!infile.is_open())
+	{
+		std::cout << "Cannot open file " << argv[1] << '\n';
+		return 1;
 	}
-	if (!ofile.is_open()){
-		std::cout << "Cannot create or modify the file \"" << av[1] << ".replace\"" << std::endl;
-		return(3);
+	if (!replaceFile.is_open())
+	{
+		std::cout << "replaceFile open fail\n";
+		return 1;
 	}
-	while (std::getline(ifile, line)){
-		while (line.find(search, 0) < line.length()){
+	int i;
+	while (std::getline(infile, line))
+	{
+		while (line.find(search, 0) < line.length())
+		{
 			i = line.find(search);
-			line.insert(i, remplace);
-			line.erase(i + remplace.length(), search.length());
+			line.insert(i, replaceStr);
+			line.erase(i + replaceStr.length(), search.length());
 		}
-		ofile << line << std::endl;
+		replaceFile << line << '\n';
 	}
-	ifile.close();
-	ofile.close();
-	return (0);
+	infile.close();
+	replaceFile.close();
+	return 0;
 }

@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 22:59:57 by iyonghun          #+#    #+#             */
-/*   Updated: 2022/12/27 10:38:14 by yonghlee         ###   ########.fr       */
+/*   Created: 2022/12/27 10:59:40 by yonghlee          #+#    #+#             */
+/*   Updated: 2022/12/27 11:00:35 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanB.hpp"
+#include "Harl.hpp"
 
-HumanB::HumanB()
+int main()
 {
+    while (1)
+    {
+        Harl harl;
+        std::string cmd;
+        std::cin >> cmd;
 
-}
-
-HumanB::HumanB(std::string _name) : name(_name)
-{
-
-}
-
-HumanB::~HumanB()
-{
-
-}
-
-void HumanB::setWeapon(Weapon &_weapon)
-{
-    this->weapon = &_weapon;
-}
-
-void HumanB::attack()
-{
-    std::cout << this->name << " attacks with their " << this->weapon->getType() << '\n';
+        harl.complain(cmd);
+    }
 }

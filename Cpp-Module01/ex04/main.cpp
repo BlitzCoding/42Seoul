@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 23:08:31 by iyonghun          #+#    #+#             */
-/*   Updated: 2022/12/26 09:27:07 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:31:31 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
 
 	std::ifstream infile(argv[1]);
 	std::string outfile(argv[1]);
+	outfile += ".replace";
 	std::ofstream replaceFile(outfile.data(), std::ios::in | std::ios::trunc);
 
 	std::string search(argv[2]);
 	std::string replaceStr(argv[3]);
 	std::string line;
 
-	outfile += ".replace";
 	if (!infile.is_open())
 	{
 		std::cout << "Cannot open file " << argv[1] << '\n';

@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:32:31 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/25 14:34:55 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:47:50 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Weapon::~Weapon()
 
 }
 
-std::string Weapon::getType() const
+std::string const &Weapon::getType()
 {
     return this->type;
 }

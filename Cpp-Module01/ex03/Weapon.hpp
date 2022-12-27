@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:13:00 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/25 23:01:42 by iyonghun         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:47:41 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ class Weapon
         Weapon();
         Weapon(std::string _type);
         ~Weapon();
-        std::string getType() const;
+        std::string const &getType();
         void        setType(std::string _type);
 };

@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 13:51:39 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/26 11:34:49 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:15:21 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,19 @@ void PhoneBook::addTable(int index)
 
 void PhoneBook::searchTable(int size)
 {
+    printTable("Index");
     printTable("First Name");
     printTable("Last Name");
     printTable("NickName");
-    printTable("Phone");
     std::cout << '\n';
     if (size > 8)
         size = 8;
     for (int i = 0; i < size; i++)
     {
-        printTable(this->contacts[i % 8].getFirstName());
-        printTable(this->contacts[i % 8].getLastName());
-        printTable(this->contacts[i % 8].getNickName());
-        printTable(this->contacts[i % 8].getPhoneNumber());
+        printTable(std::to_string(i + 1));
+        printTable(this->contacts[i].getLastName());
+        printTable(this->contacts[i].getNickName());
+        printTable(this->contacts[i].getPhoneNumber());
         std::cout << '\n';
     }
 }
@@ -109,6 +109,7 @@ void PhoneBook::searchResult(int index)
     printTable(this->contacts[index - 1].getLastName());
     printTable(this->contacts[index - 1].getNickName());
     printTable(this->contacts[index - 1].getPhoneNumber());
+    printTable(this->contacts[index - 1].getDarkestSecret());
 }
 
 // void PhoneBook::test(int size)

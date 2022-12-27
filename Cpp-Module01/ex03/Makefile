@@ -6,20 +6,20 @@
 #    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:53:16 by yonghlee          #+#    #+#              #
-#    Updated: 2022/12/27 14:53:50 by yonghlee         ###   ########.fr        #
+#    Updated: 2022/12/27 15:05:08 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= main.cpp
-					Weapon.cpp
-					HumanA.cpp
-					HumanB.cpp
+SRCS			= main.cpp \
+					Weapon.cpp \
+					HumanA.cpp \
+					HumanB.cpp \
 
 OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= c++
 RM				= rm -rf
-CXXFLAGS		= -Wall -Wextra -Werror
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 NAME			= main
 

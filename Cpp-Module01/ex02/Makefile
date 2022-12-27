@@ -6,7 +6,7 @@
 #    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:52:21 by yonghlee          #+#    #+#              #
-#    Updated: 2022/12/27 14:53:07 by yonghlee         ###   ########.fr        #
+#    Updated: 2022/12/27 15:03:59 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= c++
 RM				= rm -rf
-CXXFLAGS		= -Wall -Wextra -Werror
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 NAME			= main
 

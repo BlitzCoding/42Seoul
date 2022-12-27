@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 23:08:31 by iyonghun          #+#    #+#             */
-/*   Updated: 2022/12/27 10:31:31 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:17:19 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int main(int argc, char *argv[])
 	std::string replaceStr(argv[3]);
 	std::string line;
 
+	if (search.empty() || search == "")
+	{
+		std::cout << "Invaild Argument\n";
+		return 1;
+	}
 	if (!infile.is_open())
 	{
 		std::cout << "Cannot open file " << argv[1] << '\n';
@@ -37,6 +42,7 @@ int main(int argc, char *argv[])
 	}
 	if (!replaceFile.is_open())
 	{
+		infile.close();
 		std::cout << "replaceFile open fail\n";
 		return 1;
 	}

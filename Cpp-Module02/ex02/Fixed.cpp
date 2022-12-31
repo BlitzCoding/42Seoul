@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:59:31 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/31 15:16:00 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:18:49 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,34 @@ Fixed::Fixed(float num)
     this->fixed_point_number_value = roundf(num * (1 << this->fractional_bits));
 }
 
-Fixed::Fixed(const Fixed &fixed) {
+Fixed::Fixed(const Fixed &fixed)
+{
     *this = fixed;
 }
 
-Fixed const &Fixed::operator=(const Fixed &ref) {
+Fixed const &Fixed::operator=(const Fixed &ref)
+{
     this->fixed_point_number_value = ref.getRawBits();
     return *this;
 }
 
-int Fixed::getRawBits() const {
+int Fixed::getRawBits() const
+{
     return this->fixed_point_number_value;
 }
 
-void Fixed::setRawBits(int const raw) {
+void Fixed::setRawBits(int const raw)
+{
     this->fixed_point_number_value = raw;
 }
 
-float Fixed::toFloat() const {
+float Fixed::toFloat() const
+{
     return (float)this->fixed_point_number_value / (1 << this->fractional_bits);
 }
 
-int Fixed::toInt() const {
+int Fixed::toInt() const
+{
     return this->fixed_point_number_value >> this->fractional_bits;
 }
 

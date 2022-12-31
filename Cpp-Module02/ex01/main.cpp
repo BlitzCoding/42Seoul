@@ -6,11 +6,10 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:38:25 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/29 16:51:10 by yonghlee         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:52:48 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Fixed.hpp"
 
 int main(void)

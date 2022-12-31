@@ -5,31 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 18:07:28 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/31 18:07:46 by yonghlee         ###   ########.fr       */
+/*   Created: 2022/12/31 18:09:29 by yonghlee          #+#    #+#             */
+/*   Updated: 2022/12/31 18:36:56 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-NAME			= main
-					
-CXX				= c++
-RM				= rm -rf
-CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
+#pragma once
 
-SRCS			= main.cpp \
-					ClapTrap.cpp
-					
-OBJS			= $(SRCS:.cpp=.o)
+#include <iostream>
 
-all:			$(NAME)
+class ClapTrap
+{
+    private:
+        std::string name;
+        unsigned int hitPoint;
+        unsigned int energyPoint;
+        unsigned int attackDamage;
+    public:
+        ClapTrap();
+        ClapTrap(std::string _name);
+        ClapTrap(const ClapTrap& _rhs);
+        ~ClapTrap();
 
-$(NAME):		$(OBJS)
-				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-
-clean:
-				$(RM) $(OBJS)
-
-fclean:			clean
-				$(RM) $(NAME)
-
-re:				fclean $(NAME)
+        ClapTrap& operator=(const ClapTrap& _rhs);
+        
+        void attack(const std::string& _target);
+        void takeDamage(unsigned int _amount);
+        void beRepaired(unsigned int _amount);
+};

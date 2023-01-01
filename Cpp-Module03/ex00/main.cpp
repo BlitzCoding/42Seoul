@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:17:18 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/31 20:25:06 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/01 19:48:27 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 
 int main()
 {
-	ClapTrap a("A");
-	ClapTrap b("B");
+	ClapTrap kim("KIM");
+	ClapTrap lee("LEE");
 
-	a.attack("B");
-	b.takeDamage(5);
-	b.beRepaired(3);
-	b.attack("A");
-	a.takeDamage(10);
-	a.beRepaired(10);
-	return (0);
+	kim.attack("LEE");
+	lee.takeDamage(5);
+	
+	std::cout << "\n===============================\n";
+
+	lee.attack("KIM");
+	kim.takeDamage(8);
+	kim.beRepaired(3);
+	kim.beRepaired(3);
+
+	std::cout << "\n===============================\n";
+
+	kim.attack("LEE");
+	lee.takeDamage(2);
+	lee.takeDamage(2);
+	lee.takeDamage(2);
+	lee.takeDamage(2);
+	lee.beRepaired(3);
 }

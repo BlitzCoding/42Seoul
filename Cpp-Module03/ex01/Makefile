@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
+#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/31 18:07:28 by yonghlee          #+#    #+#              #
-#    Updated: 2022/12/31 18:08:21 by yonghlee         ###   ########.fr        #
+#    Updated: 2023/01/01 20:27:39 by iyonghun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ RM				= rm -rf
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 SRCS			= main.cpp \
+					ClapTrap.cpp	\
+					ScavTrap.cpp	\
 					
 OBJS			= $(SRCS:.cpp=.o)
 

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 20:17:18 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/02 20:44:42 by iyonghun         ###   ########.fr       */
+/*   Created: 2023/01/02 20:35:48 by iyonghun          #+#    #+#             */
+/*   Updated: 2023/01/02 20:38:07 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
 
-int main()
+class FragTrap: public ClapTrap
 {
-	ClapTrap a("A");
-	ScavTrap b("B");
+	private:
 
-	FragTrap c("C");
-	FragTrap d("D");
+	public:
+		FragTrap();
+		FragTrap(const FragTrap& _rhs);
+		FragTrap(std::string _name);
+		~FragTrap();
 
-	c.attack("D");
-	d.takeDamage(20);
-	d.beRepaired(10);
+		FragTrap &operator=(const FragTrap& rhs);
 
-	d.attack("C");
-	c.takeDamage(20);
-	c.highFiveGuys();
-
-	d.attack("C");
-	c.takeDamage(70);
-	c.takeDamage(10);
-	c.attack("D");
-	c.beRepaired(10);
-	c.highFiveGuys();
-}
+		void highFiveGuys(void);
+};

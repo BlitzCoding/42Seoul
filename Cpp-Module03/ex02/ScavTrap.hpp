@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 18:09:29 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/02 20:32:54 by iyonghun         ###   ########.fr       */
+/*   Created: 2023/01/02 20:02:58 by iyonghun          #+#    #+#             */
+/*   Updated: 2023/01/02 20:35:30 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class ScavTrap : public ClapTrap 
 {
-    protected:
-        std::string name;
-        unsigned int hitPoint;
-        unsigned int energyPoint;
-        unsigned int attackDamage;
     public:
-        ClapTrap();
-        ClapTrap(std::string _name);
-        ClapTrap(const ClapTrap& _rhs);
-        virtual ~ClapTrap();
-
-        ClapTrap& operator=(const ClapTrap& _rhs);
+        ScavTrap();
+        ScavTrap(std::string _name);
+        ScavTrap(const ScavTrap& _rhs);
+        ~ScavTrap();
         
-        void attack(const std::string& _target);
-        void takeDamage(unsigned int _amount);
-        void beRepaired(unsigned int _amount);
+        ScavTrap& operator=(const ScavTrap& rhs);
+
+        void guardGate();
+        void attack(std::string const& _target);
 
         void printStat();
 };

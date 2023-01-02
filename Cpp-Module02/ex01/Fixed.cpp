@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:39:17 by yonghlee          #+#    #+#             */
-/*   Updated: 2022/12/31 12:58:01 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/02 10:22:44 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed& rhs)
 {
     std::cout << "Copy constructor called" << std::endl;
-	this->fixed_point_number_value = rhs.getRawBits();
+	(*this) = rhs;
 }
 
 Fixed::Fixed(const int num)

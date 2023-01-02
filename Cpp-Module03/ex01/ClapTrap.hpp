@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:09:29 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/01 19:55:25 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:16:47 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ class ClapTrap
 
         ClapTrap& operator=(const ClapTrap& _rhs);
         
-        virtual void attack(const std::string& _target);
+        void attack(const std::string& _target);
         void takeDamage(unsigned int _amount);
         void beRepaired(unsigned int _amount);
+
+        void printStat();
 };

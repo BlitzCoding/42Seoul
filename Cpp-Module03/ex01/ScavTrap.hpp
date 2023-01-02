@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:41:34 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/01 20:11:42 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:18:50 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ class ScavTrap : public ClapTrap
 
         void guardGate();
         void attack(std::string const& _target);
+
+        void printStat();
 };

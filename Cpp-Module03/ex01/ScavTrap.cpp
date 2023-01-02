@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:41:38 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/01 20:32:51 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:23:43 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,40 @@
         // void guardGate();
         // void attack(std::string const& _target);
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     this->name = "NULL";
     this->hitPoint = 100;
     this->energyPoint = 50;
     this->attackDamage = 20;
 
-    std::cout << "ScavTrap " << this->name << " is now create "
+    std::cout << "\033[32mScavTrap " << this->name << " is now create "
         << this->hitPoint << " ], energyPoint : [ " << this->energyPoint
-            << " ], attackDamage : [ " << this->attackDamage << " ]\n";
+            << " ], attackDamage : [ " << this->attackDamage << " ]\033[0m\n";
 }
 
-ScavTrap::ScavTrap(std::string _name)
+ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name)
 {
     this->name = _name;
     this->hitPoint = 100;
     this->energyPoint = 50;
     this->attackDamage = 20;
 
-    std::cout << "ScavTrap " << this->name << " is now create ["
+    std::cout << "\033[32mScavTrap " << this->name << " is now create [ "
         << this->hitPoint << " ], energyPoint : [ " << this->energyPoint
-            << " ], attackDamage : [ " << this->attackDamage << " ]\n";
+            << " ], attackDamage : [ " << this->attackDamage << " ]\033[0m\n";
 }
 
-ScavTrap::ScavTrap(const ScavTrap& _rhs)
+ScavTrap::ScavTrap(const ScavTrap& _rhs) : ClapTrap(_rhs)
 {
     this->name = _rhs.name;
     this->hitPoint = _rhs.hitPoint;
     this->energyPoint = _rhs.energyPoint;
     this->attackDamage = _rhs.attackDamage;
 
-    std::cout << "[Copy Constructor] ScavTrap " << this->name << " is now create "
+    std::cout << "\033[32m[Copy Constructor] ScavTrap " << this->name << " is now create "
         << this->hitPoint << " ], energyPoint : [ " << this->energyPoint
-            << " ], attackDamage : [ " << this->attackDamage << " ]\n";
+            << " ], attackDamage : [ " << this->attackDamage << " ]\033[0m\n";
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& _rhs)
@@ -94,12 +94,16 @@ void ScavTrap::attack(std::string const& _target)
     }
     else
     {
-        this->hitPoint += 100;
         std::cout << "ScavTrap " << this->name << " attacks " << _target << ", causing "
                   << this->attackDamage << " points of damage\n";
         this->energyPoint--;
-        std::cout << name << " is now hitPoint : [ "
-                  << this->hitPoint << " ], energyPoint : [ " << this->energyPoint
-                  << " ], attackDamage : [ " << this->attackDamage << " ]\n";
+        this->printStat();
     }
+}
+
+void ScavTrap::printStat()
+{
+    std::cout << "\033[35m" << name << " is now hitPoint : [ "
+              << this->hitPoint << " ], energyPoint : [ " << this->energyPoint
+              << " ], attackDamage : [ " << this->attackDamage << " ]\033[0m\n";
 }

@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:18:19 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/02 20:31:12 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:06:06 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string &target)
 {
-    if (this->hitPoint == 0 || this->energyPoint == 0)
+    if (this->hitPoint <= 0 || this->energyPoint <= 0)
     {
         std::cout << this->name << " can't do anything\n";
         return ;
@@ -100,7 +100,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (this->hitPoint == 0 || this->energyPoint == 0)
+    if (this->hitPoint <= 0 || this->energyPoint <= 0)
     {
 		std::cout << this->name << " can't do anything\n";
         return ;

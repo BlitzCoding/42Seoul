@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:41:38 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/02 20:23:43 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:05:53 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ ScavTrap::~ScavTrap()
 
 void ScavTrap::guardGate()
 {
-    if (this->hitPoint < 0 || this->energyPoint < 0)
+    if (this->hitPoint <= 0 || this->energyPoint <= 0)
     {
         std::cout << "[ScavTrap] " << this->name << " is die\n";
     }
@@ -88,7 +88,7 @@ void ScavTrap::guardGate()
 
 void ScavTrap::attack(std::string const& _target)
 {
-    if (this->hitPoint < 0 || this->energyPoint < 0)
+    if (this->hitPoint <= 0 || this->energyPoint <= 0)
     {
         std::cout << "[ScavTrap] " << this->name << " is die\n";
     }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:35:48 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/02 20:38:07 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:33:34 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ class FragTrap: public ClapTrap
 
 		FragTrap &operator=(const FragTrap& rhs);
 
+		void attack(std::string const& _target);
 		void highFiveGuys(void);
 };

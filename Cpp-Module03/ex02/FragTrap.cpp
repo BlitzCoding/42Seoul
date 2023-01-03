@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:35:46 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/02 20:49:59 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:34:11 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ FragTrap &FragTrap::operator=(const FragTrap& _rhs)
 	this->energyPoint = _rhs.energyPoint;
 	this->attackDamage = _rhs.attackDamage;
 	return (*this);
+}
+
+void FragTrap::attack(std::string const& _target)
+{
+    if (this->hitPoint <= 0 || this->energyPoint <= 0)
+    {
+        std::cout << "[FragTrap] " << this->name << " is die\n";
+    }
+    else
+    {
+        std::cout << "FragTrap " << this->name << " attacks " << _target << ", causing "
+                  << this->attackDamage << " points of damage\n";
+        this->energyPoint--;
+        this->printStat();
+    }
 }
 
 void	FragTrap::highFiveGuys()

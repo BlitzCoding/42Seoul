@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 17:10:54 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:14:13 by yonghlee         ###   ########.fr       */
+/*   Created: 2023/01/03 17:16:11 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/03 17:24:38 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include <iostream>
+#include "WrongAnimal.hpp"
 
-Dog::Dog()
+class WrongCat : public WrongAnimal
 {
-    std::cout << "Dog Class Default Constructor\n";
-}
-
-Dog::~Dog()
-{
-    std::cout << "Dog Class Destroy\n";
-}
-
-Dog::Dog(const Dog& _rhs)
-{
-    (*this) = _rhs;
-}
-
-Dog& Dog::operator=(const Dog& _rhs)
-{
-    type = _rhs.type;
-    return (*this);
-}
-
-void Dog::makeSound() const
-{
-    std::cout << "Dog : bark bark bark bark bafkefkpfwklfasdk\n";
-}
+    public :  
+        WrongCat();
+        ~WrongCat();
+        WrongCat(const WrongCat& _rhs);
+        WrongCat &operator=(const WrongCat& _rhs);
+        void makeSound() const;
+};

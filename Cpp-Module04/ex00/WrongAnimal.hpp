@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 17:10:54 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:14:13 by yonghlee         ###   ########.fr       */
+/*   Created: 2023/01/03 17:23:38 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/03 17:23:47 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#pragma once
 
-Dog::Dog()
-{
-    std::cout << "Dog Class Default Constructor\n";
-}
+#include <iostream>
 
-Dog::~Dog()
+class WrongAnimal
 {
-    std::cout << "Dog Class Destroy\n";
-}
-
-Dog::Dog(const Dog& _rhs)
-{
-    (*this) = _rhs;
-}
-
-Dog& Dog::operator=(const Dog& _rhs)
-{
-    type = _rhs.type;
-    return (*this);
-}
-
-void Dog::makeSound() const
-{
-    std::cout << "Dog : bark bark bark bark bafkefkpfwklfasdk\n";
-}
+    protected:
+        std::string type;
+    public:
+        WrongAnimal();
+        WrongAnimal(std::string _type);
+        WrongAnimal(const WrongAnimal& _rhs);
+        WrongAnimal& operator=(const WrongAnimal& _rhs);
+        ~WrongAnimal();
+        
+        void makeSound() const;
+        std::string getType() const;
+};

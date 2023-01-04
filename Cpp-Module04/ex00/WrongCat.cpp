@@ -6,13 +6,13 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:24:53 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:24:53 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:50:41 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat()
+WrongCat::WrongCat() : WrongAnimal()
 {
     std::cout << "WrongCat Class Default Constructor\n";
 }

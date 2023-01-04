@@ -6,13 +6,13 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:36:05 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:15:24 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:49:09 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat()
+Cat::Cat() : Animal()
 {
     std::cout << "Cat Class Default Constructor\n";
 }

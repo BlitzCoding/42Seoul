@@ -6,13 +6,13 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:10:54 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:14:13 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:51:11 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : Animal()
 {
     std::cout << "Dog Class Default Constructor\n";
 }

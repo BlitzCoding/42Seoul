@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:10:54 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/04 14:07:56 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:10:34 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ void Dog::makeSound() const
     std::cout << "Dog : bark bark bark bark bafkefkpfwklfasdk\n";
 }
 
-Brain *Dog::getBrain()
+void Dog::setIdea(std::string think, int idx)
 {
-    return this->brain;
+    this->brain->ideas[idx] = think;
+}
+
+std::string Dog::getIdea(int idx) const
+{
+    return (brain->ideas[idx]);
 }

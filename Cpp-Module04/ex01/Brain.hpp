@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:44:29 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/04 14:01:54 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:08:17 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@
 
 class Brain
 {
-    private:
-        std::string ideas[100];
     public:
+        std::string ideas[100];
+
         Brain();
 	    ~Brain();
 	    Brain(const Brain& brain);
 
 	    Brain& operator= (const Brain& brain);
-
-        std::string getIdeas(int idx);
-        void        setIdeas(std::string think);
 };

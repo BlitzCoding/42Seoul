@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:07:17 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/04 14:07:02 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:09:18 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ class Dog : public Animal
         
         void makeSound() const;
 
-        Brain* getBrain();
+        void		setIdea(std::string think, int idx);
+	    std::string	getIdea(int idx) const;
 };

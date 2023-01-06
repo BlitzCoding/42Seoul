@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:36:05 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/04 14:06:19 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:09:09 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 Cat::Cat()
 {
     brain = new Brain();
+    type = "Cat";
     std::cout << "Cat Class Default Constructor\n";
 }
 
 Cat::~Cat()
 {
     std::cout << "Cat Class Destroy\n";
+    delete brain;
 }
 
 Cat::Cat(const Cat& _rhs)
 {
     std::cout << "Cat Copy Constructor\n";
-    brain = new Brain();
+    brain = new Brain(*(_rhs.brain));
+    type = _rhs.type;
     (*this) = _rhs;
 }
 
@@ -43,7 +46,12 @@ void Cat::makeSound() const
     std::cout << "Cat : meowwwwwwwwwwwwwww\n";
 }
 
-Brain *Cat::getBrain()
+void Cat::setIdea(std::string think, int idx)
 {
-    return this->brain;
+    this->brain->ideas[idx] = think;
+}
+
+std::string Cat::getIdea(int idx) const
+{
+    return (brain->ideas[idx]);
 }

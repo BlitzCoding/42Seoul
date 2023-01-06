@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:03:33 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/04 14:04:37 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:05:15 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Cat : public Animal
 
         Cat &operator=(const Cat& _rhs);
 
-        void makeSound() const;
-
-        Brain* getBrain();
+        void        makeSound() const;
+        void		setIdea(std::string think, int idx);
+	    std::string	getIdea(int idx) const;
 };

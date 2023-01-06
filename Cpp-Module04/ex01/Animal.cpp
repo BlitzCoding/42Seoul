@@ -6,24 +6,13 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:36:20 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/03 17:01:32 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:31:56 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-    // protected:
-    //     std::string type;
-    // public:
-    //     Animal();
-    //     Animal(const Animal& _rhs);
-    //     Animal& operator=(const Animal& _rhs);
-    //     virtual ~Animal();
-        
-    //     virtual void makesound();
-    //     std::string getType();
-
-Animal::Animal()
+Animal::Animal() : type("Animal")
 {
     std::cout << "Animal Default Constructor\n";
 }

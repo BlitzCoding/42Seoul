@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/02 21:20:33 by iyonghun          #+#    #+#              #
-#    Updated: 2023/01/02 21:20:33 by iyonghun         ###   ########.fr        #
+#    Created: 2023/01/02 21:20:26 by iyonghun          #+#    #+#              #
+#    Updated: 2023/01/03 18:22:27 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ RM				= rm -rf
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 SRCS			= main.cpp \
+					Animal.cpp	\
+					Cat.cpp		\
+					Dog.cpp		\
+					Brain.cpp
 					
 OBJS			= $(SRCS:.cpp=.o)
 

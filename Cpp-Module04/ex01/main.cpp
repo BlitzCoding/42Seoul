@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 21:34:34 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/08 10:29:06 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:18:22 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int main()
 		Cat c1;
 		c1.setIdea("Cat think oneone", 0);
 		c1.setIdea("Cat think twotwo", 1);
-		Cat c2 = c1;
-		c2.setIdea("Copy Cat think onetwoone", 0);
+		Cat c2;
+		c2.setIdea("Copy Cat think tmp one", 0);
+		c2.setIdea("Copy Cat think tmp two", 1);
+		c2 = c1;
 		std::cout << "\e[95mCat's first idea is \"" << c1.getIdea(0) << "\", and Copy Cat's first idea is \"" << c2.getIdea(0) << "\"\e[0m\n";
 		std::cout << "\e[95mCat's second idea is \"" << c1.getIdea(1) << "\", and Copy Cat's second idea is \"" << c2.getIdea(1) << "\"\e[0m\n";
 	}

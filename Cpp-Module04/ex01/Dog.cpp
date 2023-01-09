@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:10:54 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/06 17:10:34 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:14:07 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Dog::Dog()
 
 Dog::~Dog()
 {
+    delete brain;
     std::cout << "Dog Class Destroy\n";
 }
 

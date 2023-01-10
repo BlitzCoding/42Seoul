@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:06:40 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/10 19:12:31 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:31:13 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,24 @@ Convert& Convert::operator=(Convert const& _rhs)
 {
     this->str = _rhs.str;
     return (*this);
+}
+
+void Convert::convertChar(std::string _str)
+{
+
+}
+
+void Convert::convertFloat(std::string _str)
+{
+    
+}
+
+void Convert::convertDouble(std::string _str)
+{
+    
+}
+
+void Convert::convertInt(std::string _str)
+{
+    
 }

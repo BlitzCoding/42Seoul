@@ -6,7 +6,7 @@
 /*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 19:46:33 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/04 20:03:15 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:37:21 by iyonghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ class Bureaucrat
         class GradeTooHighException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
 
         class GradeTooLowException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
 };
 

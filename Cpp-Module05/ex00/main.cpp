@@ -32,5 +32,11 @@ int main()
 
     std::cout << "\n=============================\n";
 
+    std::cout << a << '\n';
+    std::cout << b << '\n';
+    std::cout << c << '\n';
+    std::cout << d << '\n';
+    std::cout << ee << '\n';
+
     return 0;
 }

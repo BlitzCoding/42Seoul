@@ -1,53 +1,71 @@
-#pragma once
-#include <iostream>
-#include <stdexcept>
-#include "Bureaucrat.hpp"
+#ifndef FORM_H
+# define FORM_H
 
-class Bureaucrat;
+#include "Bureaucrat.hpp"
 
 class Form
 {
-	private:
-		const std::string _name;
-		bool		_signed;
-		const int	_gradeToSign;
-		const int	_gradeToExec;
-	public:
-		Form(void);
-		Form(std::string name, int gradeToSign, int gradeToExec);
-		Form(const Form &copy);
-		virtual ~Form(void);
+private:
 
-		Form&		beSigned(Bureaucrat &author);
-		virtual void	execute(const Bureaucrat & executor) const = 0;
-		
-		std::string	getName(void) const;
-		int			getGradeToSign(void) const;
-		int			getGradeToExec(void) const;
-		bool		isSigned(void) const;
-		virtual std::string	getTarget(void) const = 0;
-		virtual void	setTarget(std::string & target) = 0;
+	bool _signed;
+	std::string const _name;
+	int const _grade2Sign;
+	int const _grade2Execute;
+	Form &operator=(Form const &form);
+	bool	beSigned(Bureaucrat &crat);
 
-		virtual	Form	*clone(std::string target) const = 0;
+	Form() : _grade2Sign(1), _grade2Execute(1){};
 
-		class GradeTooHighException : std::exception {
-			public:
-				const char	*what(void) const throw() {
-					return ("Grade Too High");
-				}
-		};
-		class GradeTooLowException : std::exception {
-			public:
-				const char	*what(void) const throw() {
-					return ("Grade Too Low");
-				}
-		};
-		class NotSignedException : std::exception {
-			public:
-				const char	*what(void) const throw() {
-					return ("Form Not Signed");
-				}
-		};
+public:
+	class GradeTooHighException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			GradeTooHighException():msg("Grade Too High Exception"){};
+			~GradeTooHighException() _NOEXCEPT {};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};	
+	class GradeTooLowException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			GradeTooLowException():msg("Grade Too Low Exception"){};
+			~GradeTooLowException()_NOEXCEPT{};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};
+	class FormNotSignedException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			FormNotSignedException() : msg("Form is not Signed"){};
+			~FormNotSignedException() _NOEXCEPT{};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};
+	
+	virtual void	action() const = 0;
+	bool	execute(Bureaucrat const & executor) const;	
+
+	bool getSigned();
+	std::string const getName() const;
+	int	getGrade2Sign() const;
+	int	getGrade2Execute() const;
+	friend std::ostream &operator<<(std::ostream &os, Form &form);	
+	void	signForm(Bureaucrat &crat);
+	Form(std::string name, int grade2Sign, int grade2Execute);
+	Form(Form const &in);
+	virtual ~Form();
 };
 
-std::ostream&	operator<<(std::ostream & out, const Form *target);
+#endif

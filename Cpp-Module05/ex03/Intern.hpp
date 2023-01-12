@@ -1,24 +1,28 @@
-#pragma once
+#ifndef INTERN_HPP
+# define INTERN_HPP
+
 #include "Form.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 class Intern
 {
 	private:
-		Form	**types;
-	public:
-		Intern(void);
-		Intern(const Intern & copy);
-		~Intern(void);
 
-		Form	*makeForm(std::string formName, std::string formTarget);
-		
-		class FormDoesNotExistException : std::exception {
-			public:
-				const char	*what(void) const throw() {
-					return ("Form Does Not Exist");
-				}
-		};
+		typedef struct s_FormShit
+		{
+			std::string	const	formType;
+			Form *(*func)(std::string const & target);
+		}				t_FormShit;
+
+	public:
+		Intern();
+		Intern(Intern const &in);
+		Intern &operator=(Intern const &in);
+		Form	*makeForm(std::string const &form, std::string const & target);
+		~Intern();
 };
+
+
+#endif

@@ -1,117 +1,53 @@
 #include "Bureaucrat.hpp"
 
-struct ooops : std::exception 
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
-  const char* what() const throw() {return "GradeTooHightExeption\n";}
-};
-
-struct ooops2 : std::exception 
-{
-  const char* what() const throw() {return "GradeTooLowExeption\n";}
-};
-
-
-Bureaucrat::Bureaucrat( void )
-{
-	std::cout << "Constructor called" << std::endl;
-	return;
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+	if (grade < 1 || grade > 150)
+		this->_grade = 150;
+	else
+		this->_grade = grade;	
+}
+Bureaucrat::Bureaucrat(Bureaucrat const & in) : _name(in._name){
+	this->_grade = in._grade;
 }
 
-Bureaucrat::Bureaucrat( std::string name, int grade )
+void	Bureaucrat::decrementGrade()
 {
-	std::cout << "Constructor called" << std::endl;
-	try
-	{
-		if (grade < 1 || grade > 149)
-		{
-			throw ooops();
-		}
-		else
-		{
-			this->_name = name;
-			this->_grade = grade;
-		}
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what();
-	}
+	if (_grade == 150)
+		throw GradeTooLowException();
+	else
+		this->_grade++;
 }
 
-Bureaucrat::Bureaucrat( Bureaucrat const & )
+void	Bureaucrat::incrementGrade()
 {
-	return ;
+	if (_grade == 1)
+		throw GradeTooHighException();
+	else
+		this->_grade--;
 }
 
-Bureaucrat & Bureaucrat::operator=( Bureaucrat const & cp )
+Bureaucrat::~Bureaucrat()
 {
-	this->_grade = cp._grade;
-    this->_name = cp._name;
-    return *this;
+
 }
 
-int Bureaucrat::getGrade ( void ) const
+std::string const Bureaucrat::getName() const
 {
-	return(this->_grade);
+	return (this->_name);
 }
 
-std::string Bureaucrat::getName( void ) const
+int	Bureaucrat::getGrade() const
 {
-	return(this->_name);
+	return (this->_grade);
 }
 
-void Bureaucrat::Increment_Grade( void )
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &crat)
 {
-	try
-    {
-        if (this->_grade < 1 || this->_grade > 149)
-        {
-            throw ooops();
-        }
-        else
-        {
-			this->_grade++;	
-        }
-    }
-    catch (std::exception & e)
-    {
-        std::cout << e.what();
-    }
-}
-
-void Bureaucrat::Decrement_Grade( void )
-{
-	try
-    {
-        if (this->_grade < 1 || this->_grade > 149)
-        {
-            throw ooops2();
-        }
-        else
-        {
-			this->_grade--;	
-        }
-    }
-    catch (std::exception & e)
-    {
-        std::cout << e.what();
-    }
-}
-
-std::ostream & operator<<( std::ostream & os, Bureaucrat const & original )
-{
-	os << original.getName() << ", bureaucrat grade " << original.getGrade();
+	os << crat.getName() << ", bureacrat grade " << crat.getGrade() << std::endl;
 	return (os);
 }
-
-const char* what()
-{
-	return("non michel");
-}
-
-Bureaucrat::~Bureaucrat( void )
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
-}
-

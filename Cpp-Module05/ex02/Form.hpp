@@ -1,38 +1,70 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef FORM_H
+# define FORM_H
 
-# include <string>
-# include <iostream>
-# include <stdexcept>
-# include "Bureaucrat.hpp"
-
-class Bureaucrat;
+#include "Bureaucrat.hpp"
 
 class Form
 {
-	public:
-		Form( void );
-		Form( std::string const name, int const Sign_Grade, int const Exec_Grade);
-		Form( Form const &, std::string const name,  int const Sign_Grade, int const Exec_Grade);
-		~Form( void );
+private:
 
-		virtual void beSigned( Bureaucrat const & A );
-		virtual bool getSigned( void ) const ;
-		virtual bool resetSigned( void );
-		virtual int get_Sign_Grade( void ) const ;
-		virtual int get_Exec_Grade( void ) const ;
-		virtual std::string getName( void ) const ;
-		virtual void execute(Bureaucrat const & executor) const = 0 ;
-		virtual void task( void ) const ;
-		virtual Form & operator=( Form const & ) ;
+	bool _signed;
+	std::string const _name;
+	int const _grade2Sign;
+	int const _grade2Execute;
+	Form &operator=(Form const &form);
+	bool	beSigned(Bureaucrat &crat);
 
-	private:
-		bool _Signed;
-		int const _Sign_Grade;
-		int const _Exec_Grade;
-		std::string const _name;
+	Form() : _grade2Sign(1), _grade2Execute(1){};
+public:
+	class GradeTooHighException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			GradeTooHighException():msg("Grade Too High Exception"){};
+			~GradeTooHighException() _NOEXCEPT {};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};	
+	class GradeTooLowException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			GradeTooLowException():msg("Grade Too Low Exception"){};
+			~GradeTooLowException()_NOEXCEPT{};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};
+	class FormNotSignedException : public std::exception
+	{
+		private:
+			std::string msg;
+		public:
+			FormNotSignedException() : msg("Form is not Signed"){};
+			~FormNotSignedException() _NOEXCEPT{};
+			const char * what() const throw()
+			{
+				return msg.c_str();
+			}
+	};
+	
+	virtual void	action() const = 0;
+	bool	execute(Bureaucrat const & executor) const;	
+
+	bool getSigned();
+	std::string const getName() const;
+	int	getGrade2Sign() const;
+	int	getGrade2Execute() const;
+	friend std::ostream &operator<<(std::ostream &os, Form &form);	
+	void	signForm(Bureaucrat &crat);
+	Form(std::string name, int grade2Sign, int grade2Execute);
+	Form(Form const &in);
+	virtual ~Form();
 };
-
-std::ostream & operator<<( std::ostream & os, Form const & original );
 
 #endif

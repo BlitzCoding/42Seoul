@@ -1,30 +1,84 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-int main()
+char **envpp = NULL;
+
+int main(int argc, char *argv[], char **envp)
 {
-	Bureaucrat b("Raiden", 130);
-	Bureaucrat c("jack", 5);
-	Bureaucrat d("jack junior", 6);
+	(void)argc;
+	(void)argv;
 
-	RobotomyRequestForm doc("chichi");
-	PresidentialPardonForm moc("jerome");
-	ShrubberyCreationForm loc("Titouan");
+	envpp = envp;
 
-	doc.beSigned(c);
-	c.executeForm(doc);
-	std::cout << "-------------------------------------------" << "\n";
-	b.executeForm(doc);
-	d.executeForm(doc);
+	Bureaucrat				Bob("Bob", 150);
+	Bureaucrat				Steve("Steve", 100);
+	Bureaucrat				Trump("Trump", 1);
+	
+	ShrubberyCreationForm	shrubForm("Bob's_garden");
+	RobotomyRequestForm		robotForm("Steve");
+	PresidentialPardonForm	PresiForm("Trump");
+	
+	try
+	{
+		std::cout << Bob << std::endl;
+		std::cout << shrubForm << std::endl;
+		Bob.executeForm(shrubForm);
+	}
+	catch(std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	try
+	{
+		int incr = Bob.getGrade() - shrubForm.getGrade2Execute() + 1;
+		for(int i = 0; i < incr; i++)
+			Bob.incrementGrade();
+		std::cout << Bob << std::endl;
+		shrubForm.signForm(Bob);
+		Bob.executeForm(shrubForm);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << '\n';
+	}
+	
 
-	moc.beSigned(c);
-	c.executeForm(moc);
+	try
+	{
+		std::cout << Steve << std::endl;
+		std::cout << robotForm << std::endl;
+		Steve.executeForm(robotForm);
+	}
+	catch(std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	try
+	{
+		int incr = Steve.getGrade() - robotForm.getGrade2Execute() + 1;
+		for(int i = 0; i < incr; i++)
+			Steve.incrementGrade();
+		std::cout << Steve << std::endl;
+		robotForm.signForm(Steve);
+		Steve.executeForm(robotForm);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << '\n';
+	}
+	
+	try
+	{
+		std::cout << Trump << std::endl;
+		PresiForm.signForm(Trump);
+		Trump.executeForm(PresiForm);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << '\n';
+	}
 
-	loc.beSigned(c);
-	c.executeForm(loc);
-
-	moc.beSigned(b);
-	b.executeForm(moc);
 }

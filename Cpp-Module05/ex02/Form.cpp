@@ -1,119 +1,90 @@
 #include "Form.hpp"
 
-struct GradeTooHighException : std::exception
-{
-  const char* what() const throw() {return "Grade Too High Exception\n";}
-};
 
-struct GradeTooLowException : std::exception
-{
-  const char* what() const throw() {return "Grade Too Low Exception\n";}
-};
 
-Form::Form( void ) : _Signed(false), _Sign_Grade(1), _Exec_Grade(1), _name("default")
+Form::Form(Form const & in) : _name(in._name), _grade2Sign(in._grade2Sign), _grade2Execute(in._grade2Execute)
+{	
+	_signed = in._signed;
+}
+
+Form::Form(std::string name, int grade2Sign, int grade2Execute) : _name(name), _grade2Sign(grade2Sign), _grade2Execute(grade2Execute)
 {
-	std::cout << "Constructor called" << std::endl;
+	if (grade2Sign < 1 || grade2Execute < 1)
+		throw GradeTooHighException();
+	else if (grade2Sign > 150 || grade2Execute > 150)
+		throw GradeTooLowException();
+	_signed = false;
+}
+
+bool	Form::getSigned()
+{
+	return (this->_signed);
+}
+
+std::string const Form::getName() const
+{
+	return (this->_name);
+}
+
+int	Form::getGrade2Execute() const
+{
+	return (this->_grade2Execute);
+}
+
+int	Form::getGrade2Sign() const
+{
+	return (this->_grade2Sign);
+}
+
+bool	Form::beSigned(Bureaucrat &crat)
+{
+	if (crat.getGrade() < this->_grade2Sign)
+	{
+		_signed = true;
+		return (true);
+	}
+	else
+		throw GradeTooHighException();
+	return (false);
+}
+
+void	Form::signForm(Bureaucrat &crat)
+{	
 	try
 	{
-		if ( this->_Exec_Grade < 1 || this->_Sign_Grade < 1)
-			throw GradeTooHighException();
-		else if ( this->_Exec_Grade > 149 || this->_Sign_Grade > 149)
-			throw GradeTooLowException();
+		if (beSigned(crat))
+			std::cout << crat.getName() << " signs " << this->_name << "!" << std::endl;
 	}
-	catch (std::exception & e)
+	catch (std::exception &e)
 	{
-		std::cout << e.what();
+		std::cout << crat.getName() << " cannot sign " << this->_name << " because " << e.what() << std::endl;
 	}
-	return;
 }
 
-Form::Form( std::string const name, int const Sign_Grade, int const Exec_Grade) : _Sign_Grade(Sign_Grade), _Exec_Grade(Exec_Grade), _name(name)
+Form::~Form() {
 
+}
+
+std::ostream &operator<<(std::ostream &os, Form &form)
 {
-	std::cout << "Constructor called" << std::endl;
-	try
+	os << form.getName() << " [Sign: " << form.getGrade2Sign() << "] [Execute: " << form.getGrade2Execute() << "] is " << (form.getSigned() ? "signed!" : "not signed!");
+
+	return (os); 
+}
+
+bool	Form::execute(Bureaucrat const & executor) const
+{
+	if (this->_signed)
 	{
-		if ( this->_Exec_Grade < 1 || this->_Sign_Grade < 1)
-			throw GradeTooHighException();
-		else if ( this->_Exec_Grade > 149 || this->_Sign_Grade > 149)
-			throw GradeTooLowException();
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what();
-	}
-	return ;
-}
-
-Form::Form( Form const &, std::string const name, int const Sign_Grade, int const Exec_Grade) : _Sign_Grade(Sign_Grade), _Exec_Grade(Exec_Grade), _name(name)
-{
-	return ;
-}
-
-Form & Form::operator=( Form const & )
-{
-	return *this;
-}
-
-bool Form::getSigned( void ) const
-{
-	return this->_Signed;
-}
-
-int Form::get_Sign_Grade ( void ) const
-{
-	return(this->_Sign_Grade);
-}
-
-int Form::get_Exec_Grade ( void ) const
-{
-	return(this->_Exec_Grade);
-}
-
-std::string Form::getName( void ) const
-{
-	return(this->_name);
-}
-
-std::ostream & operator<<( std::ostream & os, Form const & original )
-{
-	os << "Form name : " << original.getName() << ", Sign_Grade : "
-		<< original.get_Sign_Grade() << ", Exec_Grade : "
-		<< original.get_Exec_Grade() << ", Signed : "
-		<< original.getSigned();
-	return (os);
-}
-
-void Form::task(void) const 
-{
-	return ;
-}
-
-void Form::beSigned( Bureaucrat const & A )
-{
-	this->_Signed = false;
-	try
-	{
-		if ( A.getGrade() > this->get_Sign_Grade() )
-			throw GradeTooLowException();
-		else if ( A.getGrade() < 1 )
-			throw GradeTooHighException();
+		if (executor.getGrade() < this->_grade2Execute)
+		{
+			this->action();
+			return true;
+		}
 		else
-			this->_Signed = true;
+			throw GradeTooLowException();
 	}
-	catch ( std::exception & e)
-	{
-		std::cout << e.what();
-	}
-}
-
-bool Form::resetSigned( void )
-{
+	else
+		throw FormNotSignedException();
 	return false;
-}
-
-Form::~Form( void )
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
 }

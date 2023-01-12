@@ -1,32 +1,26 @@
-CC = g++
-
-RM = rm -f
-
-CFLAGS = -Wall -Wextra -Werror -std=c++98 
-
 NAME = Bureaucrat 
 
-SRCDIR = ./srcs
+SOURCES=	main.cpp			\
+			Bureaucrat.cpp		\
+			Form.cpp			\
 
-SRC = $(wildcard *.cpp)
+FLAGS = -Werror -Wall -Wextra
 
-OBJ = $(SRC:.cpp=.o)
+OBJECTS= $(SOURCES:.cpp=.o)
 
-all:
-	@$(MAKE) -j $(NAME)	
+%.o: %.cpp
+	@clang++ -Wall -Werror -Wextra -o $@ -c $<
 
-$(NAME): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+$(NAME): $(OBJECTS)
+	clang++ $(FLAGS) $(OBJECTS) -o $@
 
-%.o : %.cpp
-	$(CC) -c $(CFLAGS) $(SRC) $< -o $@ 
+all: $(NAME)
 
-clean:
-	$(RM) $(OBJ)
+clean: 
+	@rm -f $(OBJECTS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	@make clean
+	@rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re

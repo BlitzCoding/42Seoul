@@ -1,23 +1,30 @@
-NAME = bureau
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = Bureaucrat 
 
-SRCS =	main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp Intern.cpp
+SOURCES=	main.cpp					\
+			Bureaucrat.cpp				\
+			Form.cpp					\
+			ShrubberyCreationForm.cpp	\
+			RobotomyRequestForm.cpp		\
+			PresidentialPardonForm.cpp	\
+			Intern.cpp					\
+
+FLAGS = -Werror -Wall -Wextra
+
+OBJECTS= $(SOURCES:.cpp=.o)
 
 %.o: %.cpp
-	${CC} ${CFLAGS} -c $^
+	@clang++ -Wall -Werror -Wextra -o $@ -c $<
 
-OBJS = ${SRCS:.cpp=.o}
-all: ${NAME}
+$(NAME): $(OBJECTS)
+	clang++ $(FLAGS) $(OBJECTS) -o $@
 
-${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+all: $(NAME)
 
-fclean: clean
-	rm -f ${NAME}
+clean: 
+	@rm -f $(OBJECTS)
 
-clean:
-	rm -f ${OBJS}
+fclean:
+	@make clean
+	@rm -f $(NAME)
 
 re: fclean all

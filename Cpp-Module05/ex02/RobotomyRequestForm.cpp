@@ -1,72 +1,31 @@
 #include "RobotomyRequestForm.hpp"
+#include <unistd.h>
+#include <random>
+#include <time.h>
 
-struct GradeTooHighException : std::exception
+RobotomyRequestForm::RobotomyRequestForm(std::string target) :  Form("RobtomyRequestForm", 72, 45), _target(target)
 {
-  const char* what() const throw() {return "Grade Too High Exception\n";}
-};
-
-struct GradeTooLowException : std::exception
-{
-  const char* what() const throw() {return "Grade Too Low Exception\n";}
-};
-
-struct notSigned : std::exception
-{
-  const char* what() const throw() {return "not signed\n";}
-};
-
-RobotomyRequestForm::RobotomyRequestForm( void ) : Form() 
-{
-	std::cout << "Constructor called" << std::endl;
-	return;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( std::string target ) : Form(target, 75, 45)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & in) : Form(in.getName(), in.getGrade2Sign(), in.getGrade2Execute()), _target(in._target)
 {
-	std::cout << "Constructor called" << std::endl;
-	return; 
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const
+void RobotomyRequestForm::action() const
 {
-	try
-	{
-		if (this->getSigned() == true && executor.getGrade() <= this->get_Exec_Grade() && executor.getGrade() <= this->get_Sign_Grade())
-        		this->task();
-		else if (executor.getGrade() > this->get_Exec_Grade() && executor.getGrade() > this->get_Sign_Grade())
-			throw GradeTooLowException();
-		else if (executor.getGrade() < 1)
-			throw GradeTooHighException();
-		else
-			throw notSigned();
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what();
-	}
-}
-
-void RobotomyRequestForm::task( void ) const
-{
-	srand(time(0));
-	if (rand() % 2)
-		std::cout << "BRUIT DE PERCEUSE" << std::endl << this->getName() << " a été robotomisé" << std::endl;
+	srand((unsigned int)time(NULL));
+	if (rand() % 2 == 0)
+		std::cout << _target << " has been robotomized successfully" << std::endl;
 	else
-		std::cout << "Opération échouée" << std::endl;
+		std::cout << _target << " was not robotomized" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( RobotomyRequestForm const &) 
-{
-	return ;
+RobotomyRequestForm::~RobotomyRequestForm() {
+
 }
 
-RobotomyRequestForm & RobotomyRequestForm::operator=( RobotomyRequestForm const & )
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const & in)
 {
-	return *this;
-}
-
-RobotomyRequestForm::~RobotomyRequestForm( void )
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
+	this->_target = in._target;
+	return (*this);
 }

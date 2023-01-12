@@ -1,22 +1,21 @@
-#pragma once
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include "Form.hpp"
+#ifndef	ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
-class RobotomyRequestForm : public Form
-{
-	private:
-		std::string _target;
-	public:
+	#include "Form.hpp"
+
+	extern char **envpp;
+
+	class RobotomyRequestForm : public Form
+	{
+		private:
+			std::string _target;
+			RobotomyRequestForm();
+		public:
+		RobotomyRequestForm &operator=(RobotomyRequestForm const & in);
 		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &copy);
-		~RobotomyRequestForm(void);
+		RobotomyRequestForm(RobotomyRequestForm const & in);
+		~RobotomyRequestForm();
+		void	action() const;
+	};
 
-		RobotomyRequestForm	*clone(std::string target) const;
-
-		void	execute(const Bureaucrat &executor) const;
-
-		std::string	getTarget(void) const;
-		void	setTarget(std::string &target);
-};
+#endif

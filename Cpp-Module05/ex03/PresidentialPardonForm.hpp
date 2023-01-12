@@ -1,21 +1,21 @@
-#pragma once
-#include <iostream>
-#include <fstream>
-#include "Form.hpp"
+#ifndef	PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
-class PresidentialPardonForm : public Form
-{
-	private:
-		std::string _target;
-	public:
+	#include "Form.hpp"
+
+	extern char **envpp;
+
+	class PresidentialPardonForm : public Form
+	{
+		private:
+			std::string _target;
+			PresidentialPardonForm();
+		public:
+		PresidentialPardonForm &operator=(PresidentialPardonForm const & in);
 		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm & copy);
-		~PresidentialPardonForm(void);
+		PresidentialPardonForm(PresidentialPardonForm const & in);
+		~PresidentialPardonForm();
+		void	action() const;
+	};
 
-		void	execute(const Bureaucrat & executor) const;
-
-		PresidentialPardonForm	*clone(std::string target) const;
-
-		std::string	getTarget(void) const;
-		void	setTarget(std::string & target);
-};
+#endif

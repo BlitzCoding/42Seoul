@@ -1,37 +1,31 @@
 #include "RobotomyRequestForm.hpp"
+#include <unistd.h>
+#include <random>
+#include <time.h>
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	: Form::Form("robotomy request", 72, 45), _target(target)
-{ }
-
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & copy)
-	: Form::Form(copy), _target(copy.getTarget())
-{ }
-
-RobotomyRequestForm::~RobotomyRequestForm(void)
-{ }
-
-void	RobotomyRequestForm::execute(const Bureaucrat & executor) const
+RobotomyRequestForm::RobotomyRequestForm(std::string target) :  Form("RobtomyRequestForm", 72, 45), _target(target)
 {
-	std::cout << "Bruits de perceuses\n";
-
-	if (executor.getGrade() > this->getGradeToExec())
-		throw Form::GradeTooLowException();
-	if (!this->isSigned())
-		throw Form::NotSignedException();
-
-	srand(time(0));
-	if (rand() % 2)
-		std::cout << this->getTarget() << " has been robotized" << std::endl;
-	else
-		std::cout << "Failure trying to robotize " << this->getTarget() << std::endl;
 }
 
-std::string	RobotomyRequestForm::getTarget(void) const
-{ return (this->_target); }
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & in) : Form(in.getName(), in.getGrade2Sign(), in.getGrade2Execute()), _target(in._target)
+{
+}
 
-void	RobotomyRequestForm::setTarget(std::string & target)
-{ this->_target = target; }
+void RobotomyRequestForm::action() const
+{
+	srand((unsigned int)time(NULL));
+	if (rand() % 2 == 0)
+		std::cout << _target << " has been robotomized successfully" << std::endl;
+	else
+		std::cout << _target << " was not robotomized" << std::endl;
+}
 
-RobotomyRequestForm	*RobotomyRequestForm::clone(std::string target) const
-{ return (new RobotomyRequestForm(target)); }
+RobotomyRequestForm::~RobotomyRequestForm() {
+
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const & in)
+{
+	this->_target = in._target;
+	return (*this);
+}

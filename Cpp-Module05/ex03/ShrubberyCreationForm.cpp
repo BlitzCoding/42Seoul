@@ -1,35 +1,49 @@
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-	: Form::Form("shrubbery creation", 145, 137), _target(target)
-{ }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & copy)
-	: Form::Form(copy), _target(copy.getTarget())
-{ }
-
-ShrubberyCreationForm::~ShrubberyCreationForm(void)
-{ }
-
-void	ShrubberyCreationForm::execute(const Bureaucrat & executor) const
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :  Form("ShrubberyCreationForm", 145, 137), _target(target)
 {
-	std::fstream file;
-	
-	if (executor.getGrade() > this->getGradeToExec())
-		throw Form::GradeTooLowException();
-	if (!this->isSigned())
-		throw Form::NotSignedException();
-
-	file.open((std::string) this->_target + "_shrubbery", std::ios::out);
-	file << "   w     w\n  www   www\n wwwww wwwww\n   w     w\n";
-	file.close();
 }
 
-std::string	ShrubberyCreationForm::getTarget(void) const
-{ return (this->_target); }
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & in) : Form(in.getName(), in.getGrade2Sign(), in.getGrade2Execute()), _target(in._target)
+{
+}
 
-void	ShrubberyCreationForm::setTarget(std::string & target)
-{ this->_target = target; }
+void ShrubberyCreationForm::action() const
+{
+	std::ofstream file(_target + "_shrubbery");
 
-ShrubberyCreationForm	*ShrubberyCreationForm::clone(std::string target) const
-{ return (new ShrubberyCreationForm(target)); }
+	if (file.is_open())
+	{
+		for(int i = 0; i < 5; i++)
+		{
+			file	<< "      /\\      "		<< std::endl
+					<< "     /\\*\\     "		<< std::endl
+					<< "    /\\O\\*\\    "		<< std::endl
+					<< "   /*/\\/\\/\\   "		<< std::endl
+					<< "  /\\O\\/\\*\\/\\  "	<< std::endl
+					<< " /\\*\\/\\*\\/\\/\\ "	<< std::endl
+					<< "/\\O\\/\\/*/\\/O/\\"	<< std::endl
+					<< "      ||      "			<< std::endl
+					<< "      ||      "			<< std::endl
+					<< "      ||      "			<< std::endl
+					<< std::endl;
+		}
+		file.close();
+	}
+	else
+	{
+		throw "Cannot open File";
+	}
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const & in)
+{
+	this->_target = in._target;
+	return (*this);
+}

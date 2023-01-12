@@ -1,72 +1,49 @@
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
-struct GradeTooHighException : std::exception
-{
-  const char* what() const throw() {return "Grade Too High Exception\n";}
-};
 
-struct GradeTooLowException : std::exception
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :  Form("ShrubberyCreationForm", 145, 137), _target(target)
 {
-  const char* what() const throw() {return "Grade Too Low Exception\n";}
-};
-
-struct notSigned : std::exception
-{
-  const char* what() const throw() {return "not signed\n";}
-};
-
-ShrubberyCreationForm::ShrubberyCreationForm( void ) : Form() 
-{
-	std::cout << "Constructor called" << std::endl;
-	return;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) : Form(target, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & in) : Form(in.getName(), in.getGrade2Sign(), in.getGrade2Execute()), _target(in._target)
 {
-	std::cout << "Constructor called" << std::endl;
-	return; 
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void ShrubberyCreationForm::action() const
 {
-	try
+	std::ofstream file(_target + "_shrubbery");
+
+	if (file.is_open())
 	{
-		if (this->getSigned() == true && executor.getGrade() <= this->get_Exec_Grade() && executor.getGrade() <= this->get_Sign_Grade())
-			this->task();
-		else if (executor.getGrade() > this->get_Exec_Grade() && executor.getGrade() > this->get_Sign_Grade())
-			throw GradeTooLowException();
-		else if (executor.getGrade() < 1)
-			throw GradeTooHighException();
-		else
-			throw notSigned();
+		for(int i = 0; i < 5; i++)
+		{
+			file	<< "      /\\      "		<< std::endl
+					<< "     /\\*\\     "		<< std::endl
+					<< "    /\\O\\*\\    "		<< std::endl
+					<< "   /*/\\/\\/\\   "		<< std::endl
+					<< "  /\\O\\/\\*\\/\\  "	<< std::endl
+					<< " /\\*\\/\\*\\/\\/\\ "	<< std::endl
+					<< "/\\O\\/\\/*/\\/O/\\"	<< std::endl
+					<< "      ||      "			<< std::endl
+					<< "      ||      "			<< std::endl
+					<< "      ||      "			<< std::endl
+					<< std::endl;
+		}
+		file.close();
 	}
-	catch (std::exception & e)
+	else
 	{
-		std::cout << e.what();
+		throw "Cannot open File";
 	}
 }
 
-void ShrubberyCreationForm::task( void ) const
-{
-	std::string filename;
-	filename += this->getName();
-	filename += "_shrubbery";
-	std::ofstream _target( filename );
-	_target <<  "        tt                                                                                       tttt                                                                                     tttttt                                                                                      || " ; 
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &)
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const & in)
 {
-	return ;
-}
-
-ShrubberyCreationForm & ShrubberyCreationForm::operator=( ShrubberyCreationForm const & )
-{
-	return *this;
-}
-
-ShrubberyCreationForm::~ShrubberyCreationForm( void )
-{
-	std::cout << "Destructor called" << std::endl;
-	return;
+	this->_target = in._target;
+	return (*this);
 }

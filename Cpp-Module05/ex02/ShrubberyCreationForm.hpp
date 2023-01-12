@@ -1,38 +1,25 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:06:04 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:19:47 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef SHEUBBERYCREATIONFORM_HPP
+# define SHEUBBERYCREATIONFORM_HPP
 
-#ifndef SHRUBBERYCREATIONFORM_H
-#define SHRUBBERYCREATIONFORM_H
+# include <string>
+# include <fstream>
+# include <iostream>
+# include <stdexcept>
+# include "Form.hpp"
 
-#include <fstream>
-#include "Form.hpp"
+class Bureaucrat;
 
-class ShrubberyCreationForm: public Form
+class ShrubberyCreationForm : public Form
 {
-public:
-    ShrubberyCreationForm();
-    ShrubberyCreationForm(const std::string &target);
-    ShrubberyCreationForm(const ShrubberyCreationForm &src);
-    ~ShrubberyCreationForm();
-    ShrubberyCreationForm&operator=(ShrubberyCreationForm const &other);
-    
+	public:
+		ShrubberyCreationForm( void );
+		ShrubberyCreationForm( std::string target );
+		void	task( void ) const;
+		ShrubberyCreationForm( ShrubberyCreationForm const & );
+		void execute(Bureaucrat const & executor) const;
+		~ShrubberyCreationForm( void );
 
-    class OutputFileException : public std::exception {
-        public: 
-        virtual const char *what() const throw() {return "could'nt open output file";}
-    };
-
-    void execute(const Bureaucrat &executor) const;
-
-};
+		ShrubberyCreationForm & operator=( ShrubberyCreationForm const & cp );
+};	
 
 #endif

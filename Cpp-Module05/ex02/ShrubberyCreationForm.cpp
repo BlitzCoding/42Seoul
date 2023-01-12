@@ -1,88 +1,72 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:05:59 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:10:17 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) :
-Form(src.getName(), src.getSignGrade(), src.getExecGrade(), src.getTarget())
+struct GradeTooHighException : std::exception
 {
-	std::cout << "Copy construtor called for ShrubberyCreationForm" << '\n';
-	*this = src;
+  const char* what() const throw() {return "Grade Too High Exception\n";}
+};
+
+struct GradeTooLowException : std::exception
+{
+  const char* what() const throw() {return "Grade Too Low Exception\n";}
+};
+
+struct notSigned : std::exception
+{
+  const char* what() const throw() {return "not signed\n";}
+};
+
+ShrubberyCreationForm::ShrubberyCreationForm( void ) : Form() 
+{
+	std::cout << "Constructor called" << std::endl;
 	return;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm():
-Form("Shruberry Creation Form", 145, 137, "default")
+ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) : Form(target, 145, 137)
 {
-	std::cout << "Default constructor called for ShrubberyCreationForm" << '\n';
+	std::cout << "Constructor called" << std::endl;
+	return; 
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target): 
-Form("Shruberry Creation Form", 145, 137, target)
+void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	std::cout << "Default construtor called for ShrubberyCreationForm" << '\n';
+	try
+	{
+		if (this->getSigned() == true && executor.getGrade() <= this->get_Exec_Grade() && executor.getGrade() <= this->get_Sign_Grade())
+			this->task();
+		else if (executor.getGrade() > this->get_Exec_Grade() && executor.getGrade() > this->get_Sign_Grade())
+			throw GradeTooLowException();
+		else if (executor.getGrade() < 1)
+			throw GradeTooHighException();
+		else
+			throw notSigned();
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what();
+	}
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
+void ShrubberyCreationForm::task( void ) const
 {
-	std::cout << "Destructor called for ShrubberyCreationForm" << '\n';
+	std::string filename;
+	filename += this->getName();
+	filename += "_shrubbery";
+	std::ofstream _target( filename );
+	_target <<  "        tt                                                                                       tttt                                                                                     tttttt                                                                                      || " ; 
 }
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & other) 
+ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &)
 {
-	std::cout << "Assignement operator for ShrubberyCreationForm" << '\n';
-	(void) other;
+	return ;
+}
+
+ShrubberyCreationForm & ShrubberyCreationForm::operator=( ShrubberyCreationForm const & )
+{
 	return *this;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+ShrubberyCreationForm::~ShrubberyCreationForm( void )
 {
-	if (executor.getGrade() > this->getExecGrade())
-		throw GradeTooLowException();
-	if (!this->isSigned())
-		throw FormNotSignedException();
-	std::ofstream output((this->getTarget() + "_shrubbery").c_str());
-	if (!output.is_open())
-		throw OutputFileException();
-	
-	output << "                                                         ." << '\n';
-	output << "                                              .         ;  " << '\n';
-	output << "                 .              .              ;%     ;;   " << '\n';
-	output << "                   ,           ,                :;%  %;   " << '\n';
-	output << "                    :         ;                   :;%;'     .,   " << '\n';
-	output << "           ,.        %;     %;            ;        %;'    ,;" << '\n';
-	output << "             ;       ;%;  %%;        ,     %;    ;%;    ,%'" << '\n';
-	output << "              %;       %;%;      ,  ;       %;  ;%;   ,%;' " << '\n';
-	output << "               ;%;      %;        ;%;        % ;%;  ,%;'" << '\n';
-	output << "                `%;.     ;%;     %;'         `;%%;.%;'" << '\n';
-	output << "                 `:;%.    ;%%. %@;        %; ;@%;%'" << '\n';
-	output << "                    `:%;.  :;bd%;          %;@%;'" << '\n';
-	output << "                      `@%:.  :;%.         ;@@%;'   " << '\n';
-	output << "                        `@%.  `;@%.      ;@@%;         " << '\n';
-	output << "                          `@%%. `@%%    ;@@%;        " << '\n';
-	output << "                            ;@%. :@%%  %@@%;       " << '\n';
-	output << "                              %@bd%%%bd%%:;     " << '\n';
-	output << "                                #@%%%%%:;;" << '\n';
-	output << "                                %@@%%%::;" << '\n';
-	output << "                                %@@@%(o);  . '         " << '\n';
-	output << "                                %@@@o%;:(.,'         " << '\n';
-	output << "                            `.. %@@@o%::;         " << '\n';
-	output << "                               `)@@@o%::;         " << '\n';
-	output << "                                %@@(o)::;        " << '\n';
-	output << "                               .%@@@@%::;         " << '\n';
-	output << "                               ;%@@@@%::;.          " << '\n';
-	output << "                              ;%@@@@%%:;;;. " << '\n';
-	output << "                          ...;%@@@@@%%:;;;;,.." << '\n';
-
-	output.close();
-	std::cout << "Tree create in " + getTarget() + "_shrubbery" << '\n';
+	std::cout << "Destructor called" << std::endl;
+	return;
 }

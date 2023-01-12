@@ -1,59 +1,34 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Intern.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:06:41 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:06:42 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Intern.hpp"
 
-Intern::Intern(Intern const &src)
+Intern::Intern(void)
 {
-	std::cout << "Copy construtor called for Intern" << std::endl;
-	*this = src;
+	this->types = new Form*[3];	
+	this->types[0] = new ShrubberyCreationForm("null");
+	this->types[1] = new RobotomyRequestForm("null");
+	this->types[2] = new PresidentialPardonForm("null");
 }
 
-Intern::Intern()
+Intern::Intern(const Intern & copy)
 {
-	std::cout << "Default construtor called for Intern" << std::endl;
+	for (int i = 0; i < 3; i++)
+		this->types[i] = copy.types[i]->clone(copy.types[i]->getTarget());
 }
 
-Intern::~Intern()
-{
-	std::cout << "Destructor called for Intern" << std::endl;
+Intern::~Intern(void)
+{ 
+	delete[] this->types;
 }
 
-Intern & Intern::operator=(Intern const & other)
+Form	*Intern::makeForm(std::string formName, std::string formTarget)
 {
-	std::cout << "Assignement operator for Intern" << std::endl;
-	(void)other;
-	return *this;
-}
-
-Form *Intern::makeForm(const std::string formName, const std::string target) const
-{
-	Form	*newForm = NULL;
-	t_formList forms[] = {
-		{"shrubbery creation", new ShrubberyCreationForm(target)},
-		{"robotomy request", new RobotomyRequestForm(target)},
-		{"presidential pardon", new PresidentialPardonForm(target)},
-	};
-
 	for (int i = 0; i < 3; i++)
 	{
-		if (forms[i].formName == formName)
-			newForm = forms[i].formType;
-		else
-			delete forms[i].formType;
+		if (this->types[i]->getName() == formName)
+		{
+			std::cout << "Intern creates " << this->types[i]->getName() << std::endl;
+			return (this->types[i]->clone(formTarget));
+		}
 	}
-	if (newForm)
-		std::cout << "Intern creates " + formName << std::endl;
-	else
-		std::cout << "Intern could not find this form type" << std::endl;
-	return newForm;
+	throw Intern::FormDoesNotExistException();
+	return (NULL);
 }

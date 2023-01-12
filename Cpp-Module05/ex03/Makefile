@@ -1,41 +1,23 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/07 12:50:59 by rchampli          #+#    #+#              #
-#    Updated: 2023/01/12 12:22:31 by yonghlee         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = bureau
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME			= main
-					
-CXX				= c++
-RM				= rm -rf
-CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
+SRCS =	main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp \
+		ShrubberyCreationForm.cpp Intern.cpp
 
-SRCS			= main.cpp	\
-					Bureaucrat.cpp	\
-					Form.cpp	\
-					PresidentialPardonForm.cpp	\
-					RobotomyRequestForm.cpp	\
-					ShrubberyCreationForm.cpp	\
-					Intern.cpp
+%.o: %.cpp
+	${CC} ${CFLAGS} -c $^
 
-					
-OBJS			= $(SRCS:.cpp=.o)
+OBJS = ${SRCS:.cpp=.o}
+all: ${NAME}
 
-all:			$(NAME)
+${NAME}: ${OBJS}
+	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 
-$(NAME):		$(OBJS)
-				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+fclean: clean
+	rm -f ${NAME}
 
 clean:
-				$(RM) $(OBJS)
+	rm -f ${OBJS}
 
-fclean:			clean
-				$(RM) $(NAME)
-
-re:				fclean $(NAME)
+re: fclean all

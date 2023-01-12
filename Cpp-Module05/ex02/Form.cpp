@@ -1,102 +1,119 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:05:07 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:05:08 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Form.hpp"
 
-Form::Form(Form const &src): name(src.name), signGrade(src.signGrade), execGrade(src.execGrade), target(src.target)
+struct GradeTooHighException : std::exception
 {
-	std::cout << "Copy construtor called for Form" << std::endl;
-	*this = src;
+  const char* what() const throw() {return "Grade Too High Exception\n";}
+};
+
+struct GradeTooLowException : std::exception
+{
+  const char* what() const throw() {return "Grade Too Low Exception\n";}
+};
+
+Form::Form( void ) : _Signed(false), _Sign_Grade(1), _Exec_Grade(1), _name("default")
+{
+	std::cout << "Constructor called" << std::endl;
+	try
+	{
+		if ( this->_Exec_Grade < 1 || this->_Sign_Grade < 1)
+			throw GradeTooHighException();
+		else if ( this->_Exec_Grade > 149 || this->_Sign_Grade > 149)
+			throw GradeTooLowException();
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what();
+	}
+	return;
 }
 
-Form::Form():
-name("default"), sign(false), signGrade(1), execGrade(1), target("default")
+Form::Form( std::string const name, int const Sign_Grade, int const Exec_Grade) : _Sign_Grade(Sign_Grade), _Exec_Grade(Exec_Grade), _name(name)
+
 {
-	std::cout << "Default constructor called for Form" << std::endl;
+	std::cout << "Constructor called" << std::endl;
+	try
+	{
+		if ( this->_Exec_Grade < 1 || this->_Sign_Grade < 1)
+			throw GradeTooHighException();
+		else if ( this->_Exec_Grade > 149 || this->_Sign_Grade > 149)
+			throw GradeTooLowException();
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what();
+	}
+	return ;
 }
 
-Form::Form(const std::string name, int signGrade, int execGrade, const std::string _target): 
-name(name), sign(false), signGrade(signGrade), execGrade(execGrade), target(_target)
+Form::Form( Form const &, std::string const name, int const Sign_Grade, int const Exec_Grade) : _Sign_Grade(Sign_Grade), _Exec_Grade(Exec_Grade), _name(name)
 {
-	std::cout << "Form constructor called" << std::endl;
-	if (signGrade < 1)
-		throw GradeTooLowException();
-	if (signGrade > 150)
-		throw GradeTooLowException();
-	if (execGrade < 1)
-		throw GradeTooLowException();
-	if (execGrade > 150)
-		throw GradeTooLowException();
+	return ;
 }
 
-Form::~Form()
+Form & Form::operator=( Form const & )
 {
-	std::cout << "Destructor called for Form" << std::endl;
-}
-
-Form & Form::operator=(Form const & other)
-{
-	std::cout << "Assignement operator for Form" << std::endl;
-	if (this == &other)
-		return *this;
-	this->sign = other.sign;
 	return *this;
 }
 
-const std::string Form::getName() const
+bool Form::getSigned( void ) const
 {
-	return this->name;
+	return this->_Signed;
 }
 
-bool Form::isSigned() const
+int Form::get_Sign_Grade ( void ) const
 {
-	return this->sign;
+	return(this->_Sign_Grade);
 }
 
-int Form::getSignGrade() const
+int Form::get_Exec_Grade ( void ) const
 {
-	return this->signGrade;
+	return(this->_Exec_Grade);
 }
 
-int Form::getExecGrade() const
-{ 
-	return this->execGrade;
-}
-
-std::string Form::getTarget() const
+std::string Form::getName( void ) const
 {
-	return this->target;
+	return(this->_name);
 }
 
-void	Form::setSignature(const bool sign){this->sign = sign;}
-void	Form::setTarget(const std::string targ){this->target = targ;}
-
-void Form::beSigned(Bureaucrat const &bureaucrat) {
-	if (bureaucrat.getGrade() > this->signGrade)
-		throw GradeTooLowException();
-	this->sign = true;
-}
-
-void Form::execute(const Bureaucrat &executor) const
+std::ostream & operator<<( std::ostream & os, Form const & original )
 {
-	if (executor.getGrade() > this->getExecGrade())
-		throw GradeTooLowException();
-	if (!this->isSigned())
-		throw FormNotSignedException();
-	std::cout << this->name << " has been executed" << std::endl;
+	os << "Form name : " << original.getName() << ", Sign_Grade : "
+		<< original.get_Sign_Grade() << ", Exec_Grade : "
+		<< original.get_Exec_Grade() << ", Signed : "
+		<< original.getSigned();
+	return (os);
 }
 
-std::ostream &operator<<(std::ostream &os, const Form &form) {
-	os << "name: " << form.getName() << ", signed: " << form.isSigned()
-	   << ", signGrade: " << form.getSignGrade() << ", execGrade: " << form.getExecGrade();
-	return os;
+void Form::task(void) const 
+{
+	return ;
+}
+
+void Form::beSigned( Bureaucrat const & A )
+{
+	this->_Signed = false;
+	try
+	{
+		if ( A.getGrade() > this->get_Sign_Grade() )
+			throw GradeTooLowException();
+		else if ( A.getGrade() < 1 )
+			throw GradeTooHighException();
+		else
+			this->_Signed = true;
+	}
+	catch ( std::exception & e)
+	{
+		std::cout << e.what();
+	}
+}
+
+bool Form::resetSigned( void )
+{
+	return false;
+}
+
+Form::~Form( void )
+{
+	std::cout << "Destructor called" << std::endl;
+	return;
 }

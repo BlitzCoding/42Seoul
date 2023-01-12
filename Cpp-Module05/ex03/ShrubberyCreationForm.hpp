@@ -1,38 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:07:42 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:20:17 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef SHRUBBERYCREATIONFORM_H
-#define SHRUBBERYCREATIONFORM_H
-
+#pragma once
+#include <iostream>
 #include <fstream>
 #include "Form.hpp"
 
-class ShrubberyCreationForm: public Form
+class ShrubberyCreationForm : public Form
 {
-public:
-    ShrubberyCreationForm();
-    ShrubberyCreationForm(const std::string &target);
-    ShrubberyCreationForm(const ShrubberyCreationForm &src);
-    ~ShrubberyCreationForm();
-    ShrubberyCreationForm&operator=(ShrubberyCreationForm const &other);
-    
+	private:
+		std::string _target;
+	public:
+		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(const ShrubberyCreationForm & copy);
+		~ShrubberyCreationForm(void);
 
-    class OutputFileException : public std::exception {
-        public: 
-        virtual const char *what() const throw() {return "could'nt open output file";}
-    };
+		void	execute(const Bureaucrat & executor) const;
 
-    void execute(const Bureaucrat &executor) const;
+		ShrubberyCreationForm	*clone(std::string target) const;
 
+		std::string	getTarget(void) const;
+		void	setTarget(std::string & target);
 };
 
-#endif

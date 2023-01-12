@@ -1,61 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:04:42 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:34:16 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef FORM_HPP
+# define FORM_HPP
 
-#ifndef FORM_H
-#define FORM_H
+# include <string>
+# include <iostream>
+# include <stdexcept>
+# include "Bureaucrat.hpp"
 
-#include <iostream>
-#include <string>
-#include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class Form
 {
-public:
-    Form();
-    Form(const std::string &name, int signGrade, int execGrade);
-    Form(const Form &src);
-    ~Form();
-    Form&operator=(const Form &other);
+	public:
+		Form( void );
+		Form( std::string const name, int const Sign_Grade, int const Exec_Grade);
+		Form( Form const &, std::string const name,  int const Sign_Grade, int const Exec_Grade);
+		~Form( void );
 
-    class GradeTooHightException : public std::exception
-    { 
-    public: 
-        virtual const char *what() const throw(){return("grade is too high");}
-    }; 
-    class GradeTooLowException : public std::exception
-    { 
-    public: 
-        virtual const char *what() const throw(){return("grade is too low");}
-    }; 
-    class GradeUnexecutedException : public std::exception
-    { 
-    public: 
-        virtual const char *what() const throw(){return("cannot be executed");}
-    }; 
+		Form & operator=( Form const & );
+		void beSigned( Bureaucrat const & A );
+		bool getSigned( void ) const;
+		int get_Sign_Grade( void ) const ;
+		int get_Exec_Grade( void ) const ;
+		std::string getName( void ) const;
 
-    const std::string       getName() const;
-    bool                    isSigned() const;
-    int                     getSignGrade() const;
-    int                     getExecGrade() const;
-    void                    beSigned(Bureaucrat &Bureaucrat);
-
-private:
-    const std::string name;
-    bool sign;
-    const unsigned int signGrade;
-    const unsigned int execGrade;
-
+	private:
+		bool _Signed;
+		int const _Sign_Grade;
+		int const _Exec_Grade;
+		std::string const _name;
 };
 
-std::ostream &operator<<(std::ostream &os, const Form &form);
+std::ostream & operator<<( std::ostream & os, Form const & original );
 
 #endif

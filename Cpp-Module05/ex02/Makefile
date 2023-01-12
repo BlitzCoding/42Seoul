@@ -1,40 +1,32 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/12 12:05:25 by yonghlee          #+#    #+#              #
-#    Updated: 2023/01/12 12:15:57 by yonghlee         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = g++
 
-NAME			= main
-					
-CXX				= c++
-RM				= rm -rf
-CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
+RM = rm -f
 
-SRCS			= main.cpp	\
-					Bureaucrat.cpp	\
-					Form.cpp	\
-					PresidentialPardonForm.cpp	\
-					RobotomyRequestForm.cpp	\
-					ShrubberyCreationForm.cpp	\
+CFLAGS = -Wall -Wextra -Werror -std=c++98 
 
-					
-OBJS			= $(SRCS:.cpp=.o)
+NAME = Bureaucrat 
 
-all:			$(NAME)
+SRCDIR = ./srcs
 
-$(NAME):		$(OBJS)
-				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+SRC = $(wildcard *.cpp)
+
+OBJ = $(SRC:.cpp=.o)
+
+all:
+	@$(MAKE) -j $(NAME)	
+
+$(NAME): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+
+%.o : %.cpp
+	$(CC) -c $(CFLAGS) $(SRC) $< -o $@ 
 
 clean:
-				$(RM) $(OBJS)
+	$(RM) $(OBJ)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
-re:				fclean $(NAME)
+re: fclean all
+
+.PHONY: all clean fclean re

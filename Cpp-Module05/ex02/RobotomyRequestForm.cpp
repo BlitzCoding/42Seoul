@@ -1,70 +1,72 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:05:39 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:05:41 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src)
-: Form(src.getName(), src.getSignGrade(), src.getExecGrade(), src.getTarget())
+struct GradeTooHighException : std::exception
 {
-	std::cout << "Copy construtor called for RobotomyRequestForm" << std::endl;
-	*this = src;
+  const char* what() const throw() {return "Grade Too High Exception\n";}
+};
+
+struct GradeTooLowException : std::exception
+{
+  const char* what() const throw() {return "Grade Too Low Exception\n";}
+};
+
+struct notSigned : std::exception
+{
+  const char* what() const throw() {return "not signed\n";}
+};
+
+RobotomyRequestForm::RobotomyRequestForm( void ) : Form() 
+{
+	std::cout << "Constructor called" << std::endl;
 	return;
 }
 
-RobotomyRequestForm::RobotomyRequestForm():
-Form("RobotomyRequestForm", 72, 45, "default")
+RobotomyRequestForm::RobotomyRequestForm( std::string target ) : Form(target, 75, 45)
 {
-	std::cout << "Default constructor called for RobotomyRequestForm" << std::endl;
-	return;
+	std::cout << "Constructor called" << std::endl;
+	return; 
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target):
-Form("RobotomyRequestForm", 72, 45, target)
+void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	std::cout << "Default construtor called for RobotomyRequestForm" << std::endl;
-	return;
+	try
+	{
+		if (this->getSigned() == true && executor.getGrade() <= this->get_Exec_Grade() && executor.getGrade() <= this->get_Sign_Grade())
+        		this->task();
+		else if (executor.getGrade() > this->get_Exec_Grade() && executor.getGrade() > this->get_Sign_Grade())
+			throw GradeTooLowException();
+		else if (executor.getGrade() < 1)
+			throw GradeTooHighException();
+		else
+			throw notSigned();
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what();
+	}
 }
 
-RobotomyRequestForm::~RobotomyRequestForm()
+void RobotomyRequestForm::task( void ) const
 {
-	std::cout << "Destructor called for RobotomyRequestForm" << std::endl;
-	return;
+	srand(time(0));
+	if (rand() % 2)
+		std::cout << "BRUIT DE PERCEUSE" << std::endl << this->getName() << " a été robotomisé" << std::endl;
+	else
+		std::cout << "Opération échouée" << std::endl;
 }
 
-RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const & other)
+RobotomyRequestForm::RobotomyRequestForm( RobotomyRequestForm const &) 
 {
-	std::cout << "Assignement operator for RobotomyRequestForm" << std::endl;
-	(void)other;
+	return ;
+}
+
+RobotomyRequestForm & RobotomyRequestForm::operator=( RobotomyRequestForm const & )
+{
 	return *this;
 }
 
-void RobotomyRequestForm::execute(const Bureaucrat& executor) const
+RobotomyRequestForm::~RobotomyRequestForm( void )
 {
-	int random = std::rand();
-	
-	if (executor.getGrade() > this->getExecGrade())
-		throw GradeTooLowException();
-	if (!this->isSigned())
-		throw FormNotSignedException();
-	if (random % 2 == 0)
-	{
-		std::cout << "BRUUUUUTTTTTT" << std::endl;
-		std::cout << "BRUUUUUTTTTTT" << std::endl;
-		std::cout << this->getTarget() + " has been eliminated" << std::endl;
-	}
-	else
-	{	
-		std::cout << "BRUUUUUTTTTTT" << std::endl;
-		std::cout << "BRUUUUUTTTTTT" << std::endl;
-		std::cout << this->getTarget() + " survived, mission failed" << std::endl;
-	}
+	std::cout << "Destructor called" << std::endl;
+	return;
 }

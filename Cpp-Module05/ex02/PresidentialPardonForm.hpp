@@ -1,32 +1,25 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:05:33 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:19:41 by yonghlee         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
-#ifndef PRESIDENTIALPARDONFORM_H
-#define PRESIDENTIALPARDONFORM_H
+# include <string>
+# include <fstream>
+# include <iostream>
+# include <stdexcept>
+# include "Form.hpp"
 
-#include "Form.hpp"
+class Bureaucrat;
 
 class PresidentialPardonForm : public Form
 {
-public:
-    PresidentialPardonForm();
-    PresidentialPardonForm(const std::string &target);
-    PresidentialPardonForm(const PresidentialPardonForm &src);
-    virtual ~PresidentialPardonForm();
-    PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
+	public:
+		PresidentialPardonForm( void );
+		PresidentialPardonForm( std::string target );
+		void	task( void ) const;
+		PresidentialPardonForm( PresidentialPardonForm const & );
+		void execute(Bureaucrat const & executor) const;
+		~PresidentialPardonForm( void );
 
-    void execute(const Bureaucrat &executor) const;
-};
-
-std::ostream &operator<<(std::ostream &ostream, const PresidentialPardonForm &instance);
+		PresidentialPardonForm & operator=( PresidentialPardonForm const & cp );
+};	
 
 #endif

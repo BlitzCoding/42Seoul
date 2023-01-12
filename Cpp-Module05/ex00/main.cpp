@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:56:34 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:13:24 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:32:59 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 int main()
 {
 	try {
-		Bureaucrat monique("Monique", 1);
+		Bureaucrat a("A", 1);
 
-		Bureaucrat michel("Michel", 43);
+		Bureaucrat b("B", 43);
 
-		Bureaucrat sandrine("Sandrine", 150);
+		Bureaucrat c("C", 150);
 
-		std::cout << monique << std::endl;
-		std::cout << michel << std::endl;
-		std::cout << sandrine << std::endl;
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+		std::cout << c << std::endl;
 
-		monique.gradeUp();
-		michel.gradeUp();
-		sandrine.gradeDown();
+		// a.gradeUp();
+		b.gradeUp();
+		// c.gradeDown();
 
-		std::cout << michel << std::endl;
+		std::cout << a << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}

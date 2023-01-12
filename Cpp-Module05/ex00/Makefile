@@ -6,32 +6,31 @@
 #    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 15:29:55 by yonghlee          #+#    #+#              #
-#    Updated: 2023/01/12 15:31:15 by yonghlee         ###   ########.fr        #
+#    Updated: 2023/01/12 16:18:40 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Bureaucrat 
+NAME			= main
+					
+CXX				= c++
+RM				= rm -rf
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SOURCES=	main.cpp			\
-			Bureaucrat.cpp		\
+SRCS			= main.cpp \
+					Bureaucrat.cpp
+					
+OBJS			= $(SRCS:.cpp=.o)
 
-FLAGS = -Werror -Wall -Wextra
 
-OBJECTS= $(SOURCES:.cpp=.o)
+all:			$(NAME)
 
-%.o: %.cpp
-	@clang++ -Wall -Werror -Wextra -o $@ -c $<
+$(NAME):		$(OBJS)
+				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-$(NAME): $(OBJECTS)
-	clang++ $(FLAGS) $(OBJECTS) -o $@
+clean:
+				$(RM) $(OBJS)
 
-all: $(NAME)
+fclean:			clean
+				$(RM) $(NAME)
 
-clean: 
-	@rm -f $(OBJECTS)
-
-fclean:
-	@make clean
-	@rm -f $(NAME)
-
-re: fclean all
+re:				fclean $(NAME)

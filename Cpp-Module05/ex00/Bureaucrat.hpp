@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:29:53 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 15:44:31 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:53:29 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <string>
 #include <iostream>
-#include <stdexcept>
 
 class Bureaucrat
 {

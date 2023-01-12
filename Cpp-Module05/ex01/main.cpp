@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 15:30:01 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/12 16:50:03 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 int main()
 {
 	try
 	{
-		Bureaucrat crat("steve", 2);
-		Form form("Extremely important document", 2, 3);
-		Form form2("You can live", 150, 150);
+		Bureaucrat crat("KIM", 2);
+		Form form("FormA", 2, 3);
+		Form form2("FormB", 150, 150);
 
 		form.signForm(crat);
 

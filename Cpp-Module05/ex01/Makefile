@@ -1,26 +1,37 @@
-NAME = Bureaucrat 
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/12 15:30:02 by yonghlee          #+#    #+#              #
+#    Updated: 2023/01/12 16:18:55 by yonghlee         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SOURCES=	main.cpp			\
-			Bureaucrat.cpp		\
-			Form.cpp			\
+NAME			= main
+					
+CXX				= c++
+RM				= rm -rf
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-FLAGS = -Werror -Wall -Wextra
+SRCS			= main.cpp \
+					Bureaucrat.cpp	\
+					Form.cpp
+					
+OBJS			= $(SRCS:.cpp=.o)
 
-OBJECTS= $(SOURCES:.cpp=.o)
 
-%.o: %.cpp
-	@clang++ -Wall -Werror -Wextra -o $@ -c $<
+all:			$(NAME)
 
-$(NAME): $(OBJECTS)
-	clang++ $(FLAGS) $(OBJECTS) -o $@
+$(NAME):		$(OBJS)
+				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-all: $(NAME)
+clean:
+				$(RM) $(OBJS)
 
-clean: 
-	@rm -f $(OBJECTS)
+fclean:			clean
+				$(RM) $(NAME)
 
-fclean:
-	@make clean
-	@rm -f $(NAME)
-
-re: fclean all
+re:				fclean $(NAME)

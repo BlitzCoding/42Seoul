@@ -1,4 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 15:29:56 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/12 15:53:52 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat() : _name("NONE"), _grade(100)
+{
+	
+}
+
+Bureaucrat::Bureaucrat(Bureaucrat const & rhs) : _name(rhs._name){
+	this->_grade = rhs._grade;
+}
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
@@ -6,13 +27,11 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 		throw GradeTooHighException();
 	else if (grade > 150)
 		throw GradeTooLowException();
+	// 넘어가지 않는다
 	if (grade < 1 || grade > 150)
 		this->_grade = 150;
 	else
 		this->_grade = grade;	
-}
-Bureaucrat::Bureaucrat(Bureaucrat const & in) : _name(in._name){
-	this->_grade = in._grade;
 }
 
 void	Bureaucrat::decrementGrade()
@@ -31,6 +50,12 @@ void	Bureaucrat::incrementGrade()
 		this->_grade--;
 }
 
+Bureaucrat & Bureaucrat::operator=(Bureaucrat const &rhs)
+{
+	_grade = rhs._grade;
+	return *this;
+}
+
 Bureaucrat::~Bureaucrat()
 {
 
@@ -46,8 +71,8 @@ int	Bureaucrat::getGrade() const
 	return (this->_grade);
 }
 
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &crat)
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &out)
 {
-	os << crat.getName() << ", bureacrat grade " << crat.getGrade() << std::endl;
+	os << out.getName() << ", bureacrat grade " << out.getGrade() << std::endl;
 	return (os);
 }

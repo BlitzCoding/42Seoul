@@ -1,17 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 15:29:58 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/12 16:04:51 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Form.hpp"
 
+Form::Form() : _name("NONE"), _signGrade(10), _execGrade(10)
+{
 
+}
 
-Form::Form(Form const & in) : _name(in._name), _grade2Sign(in._grade2Sign), _grade2Execute(in._grade2Execute)
+Form::Form(Form const & in) : _name(in._name), _signGrade(in._signGrade), _execGrade(in._execGrade)
 {	
 	_signed = in._signed;
 }
 
-Form::Form(std::string name, int grade2Sign, int grade2Execute) : _name(name), _grade2Sign(grade2Sign), _grade2Execute(grade2Execute)
+Form::Form(std::string name, int _signGrade, int _execGrade) : _name(name), _signGrade(_signGrade), _execGrade(_execGrade)
 {
-	if (grade2Sign < 1 || grade2Execute < 1)
+	if (_signGrade < 1 || _execGrade < 1)
 		throw GradeTooHighException();
-	else if (grade2Sign > 150 || grade2Execute > 150)
+	else if (_signGrade > 150 || _execGrade > 150)
 		throw GradeTooLowException();
 	_signed = false;
 }
@@ -26,19 +41,19 @@ std::string const Form::getName() const
 	return (this->_name);
 }
 
-int	Form::getGrade2Execute() const
+int	Form::getSignGrade() const
 {
-	return (this->_grade2Execute);
+	return (this->_execGrade);
 }
 
-int	Form::getGrade2Sign() const
+int	Form::getExecGrade() const
 {
-	return (this->_grade2Sign);
+	return (this->_signGrade);
 }
 
 bool	Form::beSigned(Bureaucrat &crat)
 {
-	if (crat.getGrade() < this->_grade2Sign)
+	if (crat.getGrade() < this->_signGrade)
 	{
 		_signed = true;
 		return (true);
@@ -61,13 +76,14 @@ void	Form::signForm(Bureaucrat &crat)
 	}
 }
 
-Form::~Form() {
+Form::~Form()
+{
 
 }
 
 std::ostream &operator<<(std::ostream &os, Form &form)
 {
-	os << form.getName() << " [Sign: " << form.getGrade2Sign() << "] [Execute: " << form.getGrade2Execute() << "] is " << (form.getSigned() ? "signed!" : "not signed!");
+	os << form.getName() << " [Sign: " << form.getExecGrade() << "] [Execute: " << form.getSignGrade() << "] is " << (form.getSigned() ? "signed!" : "not signed!");
 
 	return (os); 
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:04:33 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:19:13 by yonghlee         ###   ########.fr       */
+/*   Created: 2023/01/12 12:06:28 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/12 12:19:59 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
+
+#define DEBUG "\033[1;36m"
+#define NOICE "\033[1;32m"
+#define ERROR "\033[1;31m"
+#define RESET "\033[0;0m"
+
+class Form;
 
 class Bureaucrat
 {
@@ -23,15 +31,17 @@ public:
     Bureaucrat(const std::string name, unsigned int grade);
     Bureaucrat(const Bureaucrat &src);
     virtual ~Bureaucrat();
-    Bureaucrat&operator=(const Bureaucrat &other);
 
     const std::string &getName() const;
-    const unsigned int &getGrade() const;
+    const int &getGrade() const;
     
     void gradeUp();
     void gradeDown();
 
-    class GradeTooHightException : public std::exception
+    void signForm(Form& form);
+    void executeForm(const Form &form);
+
+    class GradeTooHighException : public std::exception
     { 
     public: 
         virtual const char *what() const throw(){return("grade is too high");}
@@ -43,10 +53,10 @@ public:
     }; 
 
 private:
+    Bureaucrat&operator=(const Bureaucrat &other);
     
     const std::string name;
-    unsigned int grade;
-
+    int grade;
 };
 
 std::ostream	&operator<<( std::ostream &ostream, const Bureaucrat &instance );

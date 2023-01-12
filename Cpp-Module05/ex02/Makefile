@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/03 18:45:46 by yonghlee          #+#    #+#              #
-#    Updated: 2023/01/03 18:45:48 by yonghlee         ###   ########.fr        #
+#    Created: 2023/01/12 12:05:25 by yonghlee          #+#    #+#              #
+#    Updated: 2023/01/12 12:15:57 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,15 @@ CXX				= c++
 RM				= rm -rf
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRCS			= main.cpp
+SRCS			= main.cpp	\
+					Bureaucrat.cpp	\
+					Form.cpp	\
+					PresidentialPardonForm.cpp	\
+					RobotomyRequestForm.cpp	\
+					ShrubberyCreationForm.cpp	\
+
 					
 OBJS			= $(SRCS:.cpp=.o)
-
 
 all:			$(NAME)
 

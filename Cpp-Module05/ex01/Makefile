@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/03 18:45:39 by yonghlee          #+#    #+#              #
-#    Updated: 2023/01/04 20:35:09 by iyonghun         ###   ########.fr        #
+#    Created: 2023/01/12 12:04:03 by yonghlee          #+#    #+#              #
+#    Updated: 2023/01/12 12:14:52 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,9 @@ CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 SRCS			= main.cpp	\
 					Bureaucrat.cpp	\
-					Form.cpp	\
+					Form.cpp
 					
 OBJS			= $(SRCS:.cpp=.o)
-
 
 all:			$(NAME)
 

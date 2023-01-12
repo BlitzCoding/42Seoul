@@ -1,42 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 11:56:34 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/12 12:13:24 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 int main()
 {
-    Bureaucrat a("KIM", 1);
-    Bureaucrat b("LEE", 100);
-    Bureaucrat c("CHOI", -5);
-    Bureaucrat d("GOOD", 200);
-    Bureaucrat ee("TOM", 150);
+	try {
+		Bureaucrat monique("Monique", 1);
 
-    std::cout << "\n=============================\n";
-    
-    try
-    {
-        std::cout << "UP : " << ee.getName() << '\n';
-        ee.downGrade();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << "Exception : " << e.what() << '\n';
-    }
+		Bureaucrat michel("Michel", 43);
 
-    try
-    {
-        std::cout << "DOWN " << a.getName() << '\n';
-        a.addGrade();
-    }
-    catch (std::exception & e)
-    {
-        std::cerr << "Exception : " << e.what() << '\n';
-    }
+		Bureaucrat sandrine("Sandrine", 150);
 
-    std::cout << "\n=============================\n";
+		std::cout << monique << std::endl;
+		std::cout << michel << std::endl;
+		std::cout << sandrine << std::endl;
 
-    std::cout << a << '\n';
-    std::cout << b << '\n';
-    std::cout << c << '\n';
-    std::cout << d << '\n';
-    std::cout << ee << '\n';
+		monique.gradeUp();
+		michel.gradeUp();
+		sandrine.gradeDown();
 
-    return 0;
+		std::cout << michel << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

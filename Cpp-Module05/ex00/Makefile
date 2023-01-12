@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/03 18:45:27 by yonghlee          #+#    #+#              #
-#    Updated: 2023/01/04 20:03:47 by iyonghun         ###   ########.fr        #
+#    Created: 2023/01/12 11:56:59 by yonghlee          #+#    #+#              #
+#    Updated: 2023/01/12 12:03:51 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

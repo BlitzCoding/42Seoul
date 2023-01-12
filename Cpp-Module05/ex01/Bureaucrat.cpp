@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:04:28 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:04:31 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:35:44 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & other)
 	return *this;
 }
 
-const std::string &Bureaucrat::getName() const
+const std::string Bureaucrat::getName() const
 {
 	return this->name;
 }

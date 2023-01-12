@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:04:33 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:19:13 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:35:41 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
     virtual ~Bureaucrat();
     Bureaucrat&operator=(const Bureaucrat &other);
 
-    const std::string &getName() const;
+    const std::string getName() const;
     const unsigned int &getGrade() const;
     
     void gradeUp();

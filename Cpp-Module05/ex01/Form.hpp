@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:04:42 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:19:16 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:34:16 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ public:
         virtual const char *what() const throw(){return("cannot be executed");}
     }; 
 
-    const std::string       &getName() const;
+    const std::string       getName() const;
     bool                    isSigned() const;
     int                     getSignGrade() const;
     int                     getExecGrade() const;

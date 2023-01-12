@@ -6,7 +6,7 @@
 /*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:04:38 by yonghlee          #+#    #+#             */
-/*   Updated: 2023/01/12 12:04:40 by yonghlee         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:34:23 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Form & Form::operator=(Form const & other)
 	return *this;
 }
 
-const std::string &Form::getName() const
+const std::string Form::getName() const
 {
 	return this->name;
 }

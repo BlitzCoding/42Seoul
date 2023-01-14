@@ -1,84 +1,131 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 13:44:28 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/14 15:05:47 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-char **envpp = NULL;
-
-int main(int argc, char *argv[], char **envp)
-{
-	(void)argc;
-	(void)argv;
-
-	envpp = envp;
-
-	Bureaucrat				Bob("Bob", 150);
-	Bureaucrat				Steve("Steve", 100);
-	Bureaucrat				Trump("Trump", 1);
+int main() {
+	Bureaucrat first("KIM");
+	Bureaucrat second("LEE");
+	Bureaucrat sixth("CHOI");
 	
-	ShrubberyCreationForm	shrubForm("Bob's_garden");
-	RobotomyRequestForm		robotForm("Steve");
-	PresidentialPardonForm	PresiForm("Trump");
-	
-	try
-	{
-		std::cout << Bob << std::endl;
-		std::cout << shrubForm << std::endl;
-		Bob.executeForm(shrubForm);
-	}
-	catch(std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		int incr = Bob.getGrade() - shrubForm.getGrade2Execute() + 1;
-		for(int i = 0; i < incr; i++)
-			Bob.incrementGrade();
-		std::cout << Bob << std::endl;
-		shrubForm.signForm(Bob);
-		Bob.executeForm(shrubForm);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
-	}
-	
+	first.Bureaucrat::setGrade(138);
+	second.Bureaucrat::setGrade(46);
+	sixth.Bureaucrat::setGrade(6);
 
-	try
-	{
-		std::cout << Steve << std::endl;
-		std::cout << robotForm << std::endl;
-		Steve.executeForm(robotForm);
+	std::cout << first << std::endl;
+	std::cout << second << std::endl;
+	std::cout << sixth << std::endl;
+
+	Form *third = new PresidentialPardonForm("LEE");
+	Form *fourth = new RobotomyRequestForm("KIM");
+	Form *fifth = new ShrubberyCreationForm("CHOI");
+
+	std::cout << *third << std::endl;
+	std::cout << *fourth << std::endl;
+	std::cout << *fifth << std::endl;
+
+	std::cout << "\n=== Sign forms ===" << std::endl;
+
+	try {
+		first.Bureaucrat::signForm(*fifth);
 	}
-	catch(std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
 	}
-	try
-	{
-		int incr = Steve.getGrade() - robotForm.getGrade2Execute() + 1;
-		for(int i = 0; i < incr; i++)
-			Steve.incrementGrade();
-		std::cout << Steve << std::endl;
-		robotForm.signForm(Steve);
-		Steve.executeForm(robotForm);
+	try {
+		second.Bureaucrat::signForm(*fourth);
 	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
 	}
-	
-	try
-	{
-		std::cout << Trump << std::endl;
-		PresiForm.signForm(Trump);
-		Trump.executeForm(PresiForm);
+	try {
+		sixth.Bureaucrat::signForm(*third);
 	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << '\n';
+	catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
 	}
 
+	std::cout << "\n=== Fail Execute forms ===" << std::endl;
+
+	try {
+		first.Bureaucrat::executeForm(*fifth);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		second.Bureaucrat::executeForm(*fourth);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		sixth.Bureaucrat::executeForm(*third);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "\n=== Increase ===" << std::endl;
+
+	try {
+		first.Bureaucrat::increment();
+		std::cout << first << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		second.Bureaucrat::increment();
+		std::cout << second << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		sixth.Bureaucrat::increment();	
+		std::cout << sixth << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "\n=== Good Execute forms===" << std::endl;
+
+	try {
+		sixth.Bureaucrat::executeForm(*third);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		second.Bureaucrat::executeForm(*fourth);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		first.Bureaucrat::executeForm(*fifth);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	delete third;
+	delete fourth;
+	delete fifth;
+	return (0);
 }

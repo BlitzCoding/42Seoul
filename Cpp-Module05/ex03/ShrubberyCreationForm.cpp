@@ -1,49 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 13:49:54 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/14 13:49:54 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
-#include <fstream>
 
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("ShrubberyCreationForm", 145, 137), target(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :  Form("ShrubberyCreationForm", 145, 137), _target(target)
-{
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &old) : Form(old) {
+	this->target = old.target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & in) : Form(in.getName(), in.getGrade2Sign(), in.getGrade2Execute()), _target(in._target)
-{
+const ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &to_assignation) {
+	if (this == &to_assignation)
+		return (*this);
+	Form::operator=(to_assignation);
+	this->target = to_assignation.target;
+	return (*this);
 }
 
-void ShrubberyCreationForm::action() const
-{
-	std::ofstream file(_target + "_shrubbery");
-
-	if (file.is_open())
-	{
-		for(int i = 0; i < 5; i++)
-		{
-			file	<< "      /\\      "		<< std::endl
-					<< "     /\\*\\     "		<< std::endl
-					<< "    /\\O\\*\\    "		<< std::endl
-					<< "   /*/\\/\\/\\   "		<< std::endl
-					<< "  /\\O\\/\\*\\/\\  "	<< std::endl
-					<< " /\\*\\/\\*\\/\\/\\ "	<< std::endl
-					<< "/\\O\\/\\/*/\\/O/\\"	<< std::endl
-					<< "      ||      "			<< std::endl
-					<< "      ||      "			<< std::endl
-					<< "      ||      "			<< std::endl
-					<< std::endl;
-		}
-		file.close();
+bool ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+	if (!this->Form::getSign()) {
+		std::cout << "the form isn't signed yet!" << std::endl;
+		return (false);
+	}
+	if (executor.Bureaucrat::getGrade() <= this->Form::getGradeToExecute()) {
+		std::fstream to_read;
+		std::fstream to_write;
+		to_write.open(this->target + "_shrubbery", std::fstream::out | std::fstream::trunc);
+		to_read.open("tree", std::fstream::in);
+		if (!to_read.is_open())
+			std::cout << "can't open file with tree!" << std::endl;
+		to_read.seekg(0, to_read.end);
+		int length_buf = to_read.tellg();
+		char *buffer = new char[length_buf];
+		to_read.seekg(0, to_read.beg);
+		to_read.read(buffer, length_buf);
+		std::string buf(buffer);
+		to_write.write(buf.c_str(), buf.length());
+		delete [] buffer;
+		return (true);
 	}
 	else
-	{
-		throw "Cannot open File";
-	}
-}
-
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-
-}
-
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const & in)
-{
-	this->_target = in._target;
-	return (*this);
+		throw GradeTooLowException();
 }

@@ -1,21 +1,31 @@
-#ifndef	PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 13:49:50 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/14 13:49:50 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	#include "Form.hpp"
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
-	extern char **envpp;
+#include "Form.hpp"
 
-	class PresidentialPardonForm : public Form
-	{
-		private:
-			std::string _target;
-			PresidentialPardonForm();
-		public:
-		PresidentialPardonForm &operator=(PresidentialPardonForm const & in);
+class PresidentialPardonForm : public Form
+{
+	private:
+		std::string target;
+		
+	public:
+		bool execute(Bureaucrat const & executor) const;
+		const PresidentialPardonForm & operator=(const PresidentialPardonForm &to_assignation);
+		PresidentialPardonForm(const PresidentialPardonForm &old);
 		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(PresidentialPardonForm const & in);
 		~PresidentialPardonForm();
-		void	action() const;
-	};
+};
 
 #endif

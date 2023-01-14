@@ -1,56 +1,55 @@
-#ifndef BUREAUCRAT_H
-# define BUREAUCRAT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 13:44:20 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/14 14:53:40 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <string>
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
+
 #include <iostream>
-#include <stdexcept>
+#include <string>
+
+#include"Form.hpp"
 
 class Form;
 
-# define LOG(x) std::cout << x;
-# define LOGN(x) std::cout << x << std::endl;
-
 class Bureaucrat
 {
-private:
-	std::string const _name;
-	Bureaucrat &operator=(Bureaucrat const &buro);
-	int	_grade;
-	Bureaucrat(){};
-public:
-	class GradeTooHighException : public std::exception
-	{
-		private:
-			std::string msg;
-		public:
-			GradeTooHighException():msg("Grade Too High Exception"){};
-			~GradeTooHighException() _NOEXCEPT {};
-			const char * what() const throw()
-			{
-				return msg.c_str();
-			}
-	};	
-	class GradeTooLowException : public std::exception
-	{
-		private:
-			std::string msg;
-		public:
-			GradeTooLowException():msg("Grade Too Low Exception"){};
-			~GradeTooLowException()_NOEXCEPT{};
-			const char * what() const throw()
-			{
-				return msg.c_str();
-			}
-	};
-	Bureaucrat(std::string name, int grade);
-	Bureaucrat(Bureaucrat const &in);
-	std::string const	getName() const;
-	void	executeForm(Form const & form);
-	int	getGrade() const;
-	void	incrementGrade();
-	void	decrementGrade();
-	friend std::ostream &operator<<(std::ostream &os, const Bureaucrat &crat);
-	~Bureaucrat();
+	private:
+		int					grade;
+		const std::string	name;
+		
+	public:
+		int getGrade(void) const;
+		void setGrade(int grade);
+		const std::string getName(void) const;
+		void increment();
+		void decrement();
+
+		void signForm(Form &form) const;
+
+		void executeForm(Form const &form);
+
+		const Bureaucrat& operator=(const Bureaucrat &rhs);
+		Bureaucrat(const Bureaucrat &rhs);
+		Bureaucrat(std::string name);
+		~Bureaucrat();
+
+		class GradeTooHighException : public std::exception {
+			virtual const char *what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			virtual const char *what() const throw();
+		};
 };
+
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &source);
 
 #endif

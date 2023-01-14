@@ -1,71 +1,56 @@
-#ifndef FORM_H
-# define FORM_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 13:49:33 by yonghlee          #+#    #+#             */
+/*   Updated: 2023/01/14 13:49:34 by yonghlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FORM_HPP
+#define FORM_HPP
+
+#include <string>
+#include <iostream>
+#include <fstream>
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
-private:
+	private:
+		const std::string	name;
+		bool				is_signed;
+		const int			grade_to_sign;
+		const int 			grade_to_execute;
 
-	bool _signed;
-	std::string const _name;
-	int const _grade2Sign;
-	int const _grade2Execute;
-	Form &operator=(Form const &form);
-	bool	beSigned(Bureaucrat &crat);
+	public:
+		const std::string getName() const;
+		bool getSign() const;
+		int getGradeToSign() const;
+		int getGradeToExecute() const;
 
-	Form() : _grade2Sign(1), _grade2Execute(1){};
+		bool beSigned(const Bureaucrat &clerk);
+		virtual bool execute(Bureaucrat const & executor) const = 0;
 
-public:
-	class GradeTooHighException : public std::exception
-	{
-		private:
-			std::string msg;
-		public:
-			GradeTooHighException():msg("Grade Too High Exception"){};
-			~GradeTooHighException() _NOEXCEPT {};
-			const char * what() const throw()
-			{
-				return msg.c_str();
-			}
-	};	
-	class GradeTooLowException : public std::exception
-	{
-		private:
-			std::string msg;
-		public:
-			GradeTooLowException():msg("Grade Too Low Exception"){};
-			~GradeTooLowException()_NOEXCEPT{};
-			const char * what() const throw()
-			{
-				return msg.c_str();
-			}
-	};
-	class FormNotSignedException : public std::exception
-	{
-		private:
-			std::string msg;
-		public:
-			FormNotSignedException() : msg("Form is not Signed"){};
-			~FormNotSignedException() _NOEXCEPT{};
-			const char * what() const throw()
-			{
-				return msg.c_str();
-			}
-	};
-	
-	virtual void	action() const = 0;
-	bool	execute(Bureaucrat const & executor) const;	
+		const Form& operator=(const Form &to_assignation);
+		Form(const Form &old);
+		Form(std::string name, int grade_to_sign, int grade_to_execute);
+		virtual ~Form() = 0;
 
-	bool getSigned();
-	std::string const getName() const;
-	int	getGrade2Sign() const;
-	int	getGrade2Execute() const;
-	friend std::ostream &operator<<(std::ostream &os, Form &form);	
-	void	signForm(Bureaucrat &crat);
-	Form(std::string name, int grade2Sign, int grade2Execute);
-	Form(Form const &in);
-	virtual ~Form();
+		class GradeTooHighException : public std::exception {
+			virtual const char *what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			virtual const char *what() const throw();
+		};
 };
+
+std::ostream &operator<<(std::ostream &out, Form const &source);
 
 #endif

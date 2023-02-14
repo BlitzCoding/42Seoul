@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 18:08:57 by iyonghun          #+#    #+#              #
-#    Updated: 2023/01/10 18:09:02 by iyonghun         ###   ########.fr        #
+#    Updated: 2023/02/14 16:45:42 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= main
+NAME			= convert
 					
 CXX				= c++
 RM				= rm -rf
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRCS			= main.cpp
+SRCS			= main.cpp	\
+					Convert.cpp
 					
 OBJS			= $(SRCS:.cpp=.o)
 

@@ -3,32 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   Convert.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 18:16:49 by iyonghun          #+#    #+#             */
-/*   Updated: 2023/01/10 19:10:03 by iyonghun         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:07:37 by yonghlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef CONVERT_HPP
+#define CONVERT_HPP
 
-#include <string>
 #include <iostream>
+#include <iomanip>
+#include <string>
+
+#define CHAR 1
+#define FLOAT 2
+#define DOUBLE 3
+#define INT 4
+#define INVALID 5
+#define PSEUDO 6
 
 class Convert
 {
-    private:
-        std::string str;
-    public:
-        Convert();
-        Convert(std::string _str);
-        Convert(Convert const &_rhs);
-        ~Convert();
+private:
+    int i_arg;
+    float f_arg;
+    char c_arg;
+    double d_arg;
+    
+    std::string def;
 
-        Convert &operator=(Convert const &_rhs);
+    int type;
+    bool isWrong;
 
-        void convertChar(std::string _str);
-        void convertFloat(std::string _str);
-        void convertDouble(std::string _str);
-        void convertInt(std::string _str);
+public:
+    Convert();
+
+    Convert(const std::string &def);
+
+    Convert(const Convert &convert);
+    ~Convert();
+    Convert &operator=(const Convert &rhs);
+
+    void detect_type(char *arg);
+    void convert_data();
+    void print_data();
+    void getIArg() const;
+    void getFArg() const;
+    void getCArg() const;
+    void getDArg() const;
+    int getType() const;
+    void setType(int type);
+
+    const std::string &getDef() const;
+
+    void setDef(const std::string &def);
 };
+bool isLiteral(std::string str);
+std::string convertLiteralToDouble(std::string str);
+#endif

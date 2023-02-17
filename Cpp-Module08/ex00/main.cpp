@@ -69,12 +69,10 @@ void list_test()
 
 int main()
 {
-
-    
     std::cout << C_RED << "\n---------------- test ------------------\n" << C_NRML;
 
     std::cout << "what type do you want to test container? : \n";
-    std::cout << "1.vector, 2.list";
+    std::cout << "1.vector, 2.list \n";
     std::cin >> type;
 
     switch (type)

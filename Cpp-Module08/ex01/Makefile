@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iyonghun <iyonghun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yonghlee <yonghlee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 18:11:39 by iyonghun          #+#    #+#              #
-#    Updated: 2023/01/10 18:11:40 by iyonghun         ###   ########.fr        #
+#    Updated: 2023/02/20 16:33:17 by yonghlee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CXX				= c++
 RM				= rm -rf
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRCS			= main.cpp
+SRCS			= main.cpp	\
+					Span.cpp
 					
 OBJS			= $(SRCS:.cpp=.o)
 

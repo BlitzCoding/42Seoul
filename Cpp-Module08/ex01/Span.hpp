@@ -28,7 +28,7 @@ class Span
 				}
 		};
 
-        class VectorSizeFault : public std::exception
+        class VectorSizeOne : public std::exception
 		{
 			public:
 				char const * what() const throw()

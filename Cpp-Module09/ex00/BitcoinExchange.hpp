@@ -21,10 +21,7 @@ class BitcoinExchange
 
         void    openDatabase();
         void    readDatabase(char* argv);
-        void    PrintMap(std::map<std::string, float> mymap);
-        void    ReadInput(std::string file);
-        int     Parsing(int year, int month, int day, std::string raate, float rate, std::string line);
-        void    PrintOuput(std::string inputdate, float bitcoins);
+        void    solve(int year, int month, int day, float rate);
 };
 
 #endif

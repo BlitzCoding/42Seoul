@@ -21,10 +21,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &bitcoin)
 	return (*this);
 }
 
-bool is_dash(char c) {
-    return c == '-';
-}
-
 bool check_value(float rate)
 {
     if (rate <= 0)
@@ -35,6 +31,16 @@ bool check_value(float rate)
     if (rate >= 1000)
     {
         std::cerr << "Error: too large a number." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool check_date(int month, int day)
+{
+    if ((month < 1 && month > 12) || (day < 1 && day > 31))
+    {
+        std::cerr << "Error: Date Format Error" << std::endl;
         return false;
     }
     return true;
@@ -57,7 +63,6 @@ void BitcoinExchange::openDatabase()
     {
         file >> readline;
         std::string date = readline.substr(0, 10);
-        date.erase(std::remove_if(date.begin(), date.end(), is_dash), date.end());
 
         std::stringstream   rateline;
         rateline << readline.substr(11);
@@ -66,6 +71,39 @@ void BitcoinExchange::openDatabase()
         database.insert(make_pair(date, rate));
     }
     file.close();
+}
+
+void BitcoinExchange::solve(int year, int month, int day, float rate)
+{
+    std::stringstream   ss;
+    bool                check = false;
+
+    ss << std::setw(4) << std::setfill('0') << year << "-";
+    ss << std::setw(2) << std::setfill('0') << month << "-";;
+    ss << std::setw(2) << std::setfill('0') << day;
+    std::string date = ss.str();
+
+    std::map<std::string, float>::iterator iter = database.begin();
+    for (iter = database.begin(); iter != database.end(); iter++)
+    {
+        if (iter->first == date)
+        {
+            check = true;
+            break;
+        }
+    }
+
+    if (check)
+    {
+        std::cout << date << " => " << rate << " = " << rate * iter->second << '\n';
+    }
+    else
+    {
+       std::map<std::string, float>::iterator tmp = database.lower_bound(date);
+       tmp = std::prev(tmp);
+       std::cout << date << " => " << rate << " = " << rate * tmp->second << '\n';
+    }
+
 }
 
 void BitcoinExchange::readDatabase(char* argv)
@@ -106,9 +144,8 @@ void BitcoinExchange::readDatabase(char* argv)
         
         value_rate << value;
         value_rate >> rate;
-        if (!check_value(rate))
+        if (!check_value(rate) || !check_date(month, day))
             continue;
-        std::cout << rate << '\n';
-       
+        solve(year, month, day, rate);
     }
 }

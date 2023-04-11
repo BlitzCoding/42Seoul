@@ -38,7 +38,7 @@ bool check_value(float rate)
 
 bool check_date(int month, int day)
 {
-    if ((month < 1 && month > 12) || (day < 1 && day > 31))
+    if ((month < 1 || month > 12) || (day < 1 || day > 31))
     {
         std::cerr << "Error: Date Format Error" << std::endl;
         return false;

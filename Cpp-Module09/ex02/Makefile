@@ -1,4 +1,4 @@
-NAME			= main
+NAME			= PmergeMe
 					
 CXX				= c++
 RM				= rm -rf

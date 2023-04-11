@@ -1,4 +1,4 @@
-NAME			= main
+NAME			= RPN
 					
 CXX				= c++
 RM				= rm -rf

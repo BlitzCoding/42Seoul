@@ -20,7 +20,13 @@ public:
 	PmergeMe& operator=(const PmergeMe& rhs);
 	~PmergeMe();
 
-    void solve(char **argv);
+    void solve(int argc, char **argv);
+
+	template<typename T>
+	void merge_sort(T &structure, int start, int end);
+
+	template<typename T>
+	void merge(T &structure, int left, int mid, int right);
 };
 
 #endif

@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     try
     {
         PmergeMe p;
-        p.solve(argv);
+        p.solve(argc, argv);
     }
     catch(const std::exception& e)
     {

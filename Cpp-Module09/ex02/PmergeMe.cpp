@@ -113,6 +113,6 @@ void PmergeMe::solve(int argc, char **argv)
 	for (std::vector<int>::iterator iter = vec.begin(); iter != vec.end(); iter++)
 		std::cout << *iter << " ";
 	std::cout << '\n';
-	std::cout << "Time to process a range of " << vec.size() <<  " elements with std::vector : " << std::fixed << std::setprecision(5) << vector_time * 10 << " us\n";
-	std::cout << "Time to process a range of " << deq.size() <<  " elements with std::deque : " << std::fixed << std::setprecision(5) << deque_time * 10 << std::setprecision(0) << " us\n";
+	std::cout << "Time to process a range of " << vec.size() <<  " elements with std::vector : " << std::fixed << std::setprecision(6) << vector_time << " us\n";
+	std::cout << "Time to process a range of " << deq.size() <<  " elements with std::deque : " << std::fixed << std::setprecision(6) << deque_time << " us\n";
 }
